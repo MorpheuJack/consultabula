@@ -154,7 +154,7 @@ export default function InputArea({ onTextSubmit, onImageSubmit, isLoading }: In
                   <TooltipProvider>
                       <Tooltip>
                           <TooltipTrigger asChild>
-                              <span className="flex items-center"><Mic className="h-5 w-5" />Voz</span>
+                              <span className="flex items-center gap-2"><Mic className="h-5 w-5" />Voz</span>
                           </TooltipTrigger>
                           <TooltipContent>
                               <p>Funcionalidade em breve!</p>
