@@ -22,32 +22,34 @@ export default function Hero() {
     >
         <div className="container mx-auto px-4 z-10 flex flex-col items-center">
             <ScrollFloat
-                textClassName="text-5xl lg:text-7xl font-extrabold font-headline leading-tight tracking-tighter mb-6 text-white"
+                textClassName="text-4xl md:text-5xl lg:text-7xl font-extrabold font-headline leading-tight tracking-tighter text-white"
                 containerClassName='mb-6'
             >
                 Precisa consultar a bula de um remédio?
             </ScrollFloat>
-            <p className="mt-4 text-lg lg:text-xl text-white/90 max-w-2xl mx-auto">
+            <p className="mt-4 text-base md:text-lg lg:text-xl text-white/90 max-w-2xl mx-auto">
                 A resposta mais rápida e confiável para suas dúvidas sobre medicamentos.
                 Digite o nome ou envie uma foto.
             </p>
             
             <div className="mt-12 w-full max-w-2xl">
-                <div className="relative">
-                    <Search className="absolute left-6 top-1/2 -translate-y-1/2 h-6 w-6 text-muted-foreground" />
-                    <input
-                        type="text"
-                        placeholder="Digite o nome do medicamento aqui..."
-                        className="w-full h-16 pl-16 pr-40 rounded-full text-lg text-foreground bg-white/90 focus:bg-white focus:outline-none focus:ring-4 focus:ring-white/50 transition-all duration-300 shadow-2xl"
-                    />
+                <div className="relative flex flex-col sm:flex-row gap-4">
+                    <div className="relative flex-grow">
+                        <Search className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                        <input
+                            type="text"
+                            placeholder="Digite o nome do medicamento..."
+                            className="w-full h-14 sm:h-16 pl-12 sm:pl-16 pr-4 rounded-full text-base sm:text-lg text-foreground bg-white/90 focus:bg-white focus:outline-none focus:ring-4 focus:ring-white/50 transition-all duration-300 shadow-2xl"
+                        />
+                    </div>
                      <Button
                         size="lg"
-                        className="absolute right-2.5 top-1/2 -translate-y-1/2 bg-accent hover:bg-accent/90 text-accent-foreground text-lg py-7 px-8 rounded-full shadow-lg hover:shadow-xl transition-shadow"
+                        className="w-full sm:w-auto bg-accent hover:bg-accent/90 text-accent-foreground text-base sm:text-lg py-7 px-6 sm:px-8 rounded-full shadow-lg hover:shadow-xl transition-shadow shrink-0"
                         asChild
                     >
                        <Link href="/app">
                             Consultar
-                            <ArrowRight className="ml-2 h-5 w-5" />
+                            <ArrowRight className="ml-2 h-5 w-5 hidden sm:inline" />
                        </Link>
                     </Button>
                 </div>

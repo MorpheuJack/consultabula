@@ -147,14 +147,14 @@ export default function InputArea({ onTextSubmit, onImageSubmit, isLoading }: In
       <Card className="bg-card shadow-lg rounded-2xl border-none">
         <CardContent className="p-2">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-3 bg-secondary/80 p-1 h-12">
-              <TabsTrigger value="text" className="rounded-lg text-lg data-[state=active]:bg-card data-[state=active]:text-primary data-[state=active]:shadow-md"><FileText className="mr-2 h-5 w-5" />Texto</TabsTrigger>
-              <TabsTrigger value="image" className="rounded-lg text-lg data-[state=active]:bg-card data-[state=active]:text-primary data-[state=active]:shadow-md"><ImageIcon className="mr-2 h-5 w-5" />Imagem</TabsTrigger>
-              <TabsTrigger value="voice" disabled className="rounded-lg text-lg">
+            <TabsList className="grid w-full grid-cols-3 bg-secondary/80 p-1 h-auto sm:h-12">
+              <TabsTrigger value="text" className="rounded-lg text-sm sm:text-lg data-[state=active]:bg-card data-[state=active]:text-primary data-[state=active]:shadow-md flex-col sm:flex-row gap-1 sm:gap-2 py-2"><FileText className="h-5 w-5" /><span>Texto</span></TabsTrigger>
+              <TabsTrigger value="image" className="rounded-lg text-sm sm:text-lg data-[state=active]:bg-card data-[state=active]:text-primary data-[state=active]:shadow-md flex-col sm:flex-row gap-1 sm:gap-2 py-2"><ImageIcon className="h-5 w-5" /><span>Imagem</span></TabsTrigger>
+              <TabsTrigger value="voice" disabled className="rounded-lg text-sm sm:text-lg flex-col sm:flex-row gap-1 sm:gap-2 py-2">
                   <TooltipProvider>
                       <Tooltip>
                           <TooltipTrigger asChild>
-                              <span className="flex items-center"><Mic className="mr-2 h-5 w-5" />Voz</span>
+                              <span className="flex items-center"><Mic className="h-5 w-5" />Voz</span>
                           </TooltipTrigger>
                           <TooltipContent>
                               <p>Funcionalidade em breve!</p>
@@ -163,7 +163,7 @@ export default function InputArea({ onTextSubmit, onImageSubmit, isLoading }: In
                   </TooltipProvider>
               </TabsTrigger>
             </TabsList>
-            <div className="p-6">
+            <div className="p-4 sm:p-6">
               <TabsContent value="text" className="mt-0">
                 <Form {...form}>
                   <form
@@ -180,8 +180,8 @@ export default function InputArea({ onTextSubmit, onImageSubmit, isLoading }: In
                             <div className="relative">
                                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                                 <Input
-                                placeholder="Digite o nome do medicamento. Ex: Paracetamol 500mg"
-                                className="resize-none pl-12 h-14 text-lg bg-background rounded-xl"
+                                placeholder="Ex: Paracetamol 500mg"
+                                className="resize-none pl-12 h-14 text-base sm:text-lg bg-background rounded-xl"
                                 {...field}
                                 />
                             </div>
@@ -191,7 +191,7 @@ export default function InputArea({ onTextSubmit, onImageSubmit, isLoading }: In
                       )}
                     />
                     <motion.div variants={buttonVariants} initial="initial" animate="animate">
-                      <Button type="submit" size="lg" disabled={isLoading} className="w-full bg-accent hover:bg-accent/90 text-lg rounded-xl h-14">
+                      <Button type="submit" size="lg" disabled={isLoading} className="w-full bg-accent hover:bg-accent/90 text-base sm:text-lg rounded-xl h-14">
                         {isLoading && activeTab === 'text' ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
                         Buscar Informações
                       </Button>
@@ -214,7 +214,7 @@ export default function InputArea({ onTextSubmit, onImageSubmit, isLoading }: In
                            </AlertDescription>
                          </Alert>
                        )}
-                       <Button type="button" size="lg" onClick={takePicture} className="w-full bg-primary hover:bg-primary/90 text-lg rounded-xl h-14">
+                       <Button type="button" size="lg" onClick={takePicture} className="w-full bg-primary hover:bg-primary/90 text-base sm:text-lg rounded-xl h-14">
                          <Camera className="mr-2 h-5 w-5" />
                          Tirar Foto
                        </Button>
@@ -222,7 +222,7 @@ export default function InputArea({ onTextSubmit, onImageSubmit, isLoading }: In
                   ) : (
                     <>
                       <div className="flex justify-center items-center w-full">
-                          <div className="flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-xl bg-secondary transition-colors duration-300 relative">
+                          <div className="flex flex-col items-center justify-center w-full h-48 sm:h-64 border-2 border-dashed rounded-xl bg-secondary transition-colors duration-300 relative">
                               {previewUrl ? (
                                   <>
                                       <Image src={previewUrl} alt="Pré-visualização" layout="fill" objectFit="contain" className="rounded-lg p-2"/>
@@ -232,26 +232,26 @@ export default function InputArea({ onTextSubmit, onImageSubmit, isLoading }: In
                                   </>
                               ) : (
                                   <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full h-full cursor-pointer hover:bg-secondary/60">
-                                      <div className="flex flex-col items-center justify-center pt-5 pb-6 text-muted-foreground">
-                                          <Upload className="w-10 h-10 mb-4" />
-                                          <p className="mb-2 text-base"><span className="font-semibold text-accent">Clique para enviar</span> ou arraste e solte</p>
-                                          <p className="text-sm">PNG, JPG, ou WEBP</p>
+                                      <div className="flex flex-col items-center justify-center pt-5 pb-6 text-muted-foreground text-center px-2">
+                                          <Upload className="w-8 h-8 sm:w-10 sm:h-10 mb-3 sm:mb-4" />
+                                          <p className="mb-2 text-sm sm:text-base"><span className="font-semibold text-accent">Clique para enviar</span> ou arraste</p>
+                                          <p className="text-xs sm:text-sm">PNG, JPG, WEBP</p>
                                       </div>
                                       <Input id="dropzone-file" type="file" className="hidden" onChange={handleFileChange} accept="image/png, image/jpeg, image/webp" disabled={isLoading} />
                                   </label>
                               )}
                           </div>
                       </div>
-                      <div className="grid grid-cols-2 gap-4">
-                          <Button type="button" variant="outline" size="lg" disabled={isLoading} className="text-lg rounded-xl h-14 bg-card hover:bg-secondary/80" onClick={openCamera}>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          <Button type="button" variant="outline" size="lg" disabled={isLoading} className="text-base sm:text-lg rounded-xl h-14 bg-card hover:bg-secondary/80" onClick={openCamera}>
                               <Camera className="mr-2 h-5 w-5" />
-                              {isCameraOpen ? 'Fechar Câmera' : 'Abrir Câmera'}
+                              {isCameraOpen ? 'Fechar' : 'Câmera'}
                           </Button>
                           <label htmlFor="dropzone-file-button" className="w-full">
-                            <Button type="button" asChild size="lg" disabled={isLoading} className="w-full text-lg rounded-xl h-14 bg-card hover:bg-secondary/80">
-                                <span>
+                            <Button type="button" asChild size="lg" disabled={isLoading} className="w-full text-base sm:text-lg rounded-xl h-14 bg-card hover:bg-secondary/80">
+                                <span className="flex items-center justify-center">
                                     <Upload className="mr-2 h-5 w-5" />
-                                    Enviar Arquivo
+                                    Enviar
                                 </span>
                             </Button>
                             <Input id="dropzone-file-button" type="file" className="hidden" onChange={handleFileChange} accept="image/png, image/jpeg, image/webp" disabled={isLoading} />
@@ -260,7 +260,7 @@ export default function InputArea({ onTextSubmit, onImageSubmit, isLoading }: In
                     </>
                   )}
                   <motion.div variants={buttonVariants} initial="initial" animate="animate">
-                    <Button type="submit" size="lg" disabled={!imageDataUri || isLoading} className="w-full bg-accent hover:bg-accent/90 text-lg rounded-xl h-14">
+                    <Button type="submit" size="lg" disabled={!imageDataUri || isLoading} className="w-full bg-accent hover:bg-accent/90 text-base sm:text-lg rounded-xl h-14">
                       {isLoading && activeTab === 'image' ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
                       Analisar Imagem
                     </Button>

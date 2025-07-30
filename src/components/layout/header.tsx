@@ -1,7 +1,10 @@
 
+'use client';
+
 import Link from 'next/link';
-import { Pill, ShoppingCart } from 'lucide-react';
+import { Menu, Pill, ShoppingCart } from 'lucide-react';
 import { Button } from '../ui/button';
+import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet';
 
 export default function Header() {
   return (
@@ -15,7 +18,7 @@ export default function Header() {
               Consulta Bula
             </span>
         </Link>
-        <div className="hidden md:flex items-center gap-2">
+        <nav className="hidden md:flex items-center gap-2">
             <Button variant="ghost" asChild className="text-white hover:bg-white/10 hover:text-white">
                 <Link href="/#features">Funcionalidades</Link>
             </Button>
@@ -32,6 +35,29 @@ export default function Header() {
                     0
                 </span>
             </Button>
+        </nav>
+        <div className="md:hidden">
+            <Sheet>
+                <SheetTrigger asChild>
+                    <Button variant="ghost" size="icon" className="text-white hover:bg-white/10">
+                        <Menu className="h-6 w-6" />
+                        <span className="sr-only">Abrir menu</span>
+                    </Button>
+                </SheetTrigger>
+                <SheetContent side="right" className="bg-background/90 backdrop-blur-sm text-foreground">
+                    <nav className="flex flex-col gap-6 mt-12 text-lg">
+                        <Link href="/#features" className="hover:text-accent transition-colors">Funcionalidades</Link>
+                        <Link href="/shop" className="hover:text-accent transition-colors">Loja</Link>
+                        <Link href="/app" className="hover:text-accent transition-colors">Consultar Bula</Link>
+                        <div className="border-t border-border pt-6">
+                            <Button variant="ghost" className="w-full justify-start gap-2 text-lg">
+                                <ShoppingCart className="h-6 w-6" />
+                                Carrinho (0)
+                            </Button>
+                        </div>
+                    </nav>
+                </SheetContent>
+            </Sheet>
         </div>
       </div>
     </header>

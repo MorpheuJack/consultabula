@@ -1,4 +1,6 @@
 
+'use client';
+
 import { HeartPulse, Search, SlidersHorizontal, BarChart } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import ScrollFloat from '../ui/scroll-float';
@@ -28,30 +30,30 @@ const featureData = [
 
 export default function Features() {
   return (
-    <section id="features" className="py-24 sm:py-32 bg-background">
+    <section id="features" className="py-20 sm:py-24 bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 md:mb-16">
             <ScrollFloat
                 as="h2"
-                textClassName="text-4xl lg:text-5xl font-extrabold font-headline text-accent tracking-tighter"
+                textClassName="text-3xl md:text-4xl lg:text-5xl font-extrabold font-headline text-accent tracking-tighter"
             >
                 Tudo que você precisa em um só lugar
             </ScrollFloat>
-            <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="mt-4 text-base md:text-lg text-muted-foreground max-w-3xl mx-auto">
                 Nossa plataforma foi desenhada para ser sua assistente de saúde pessoal, fornecendo informações claras e rápidas sobre medicamentos.
             </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {featureData.map((feature, index) => (
-                <Card key={index} className="bg-card border-none shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2">
-                    <CardHeader>
-                        <div className="flex-shrink-0 bg-accent/10 text-accent p-4 rounded-lg w-fit mb-4">
-                            <feature.icon className="h-8 w-8" />
+                <Card key={index} className="bg-card border-none shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2 text-center sm:text-left">
+                    <CardHeader className="items-center sm:items-start">
+                        <div className="flex-shrink-0 bg-accent/10 text-accent p-3 rounded-lg w-fit mb-4">
+                            <feature.icon className="h-7 w-7" />
                         </div>
-                        <CardTitle className="text-xl font-bold">{feature.title}</CardTitle>
+                        <CardTitle className="text-lg font-bold">{feature.title}</CardTitle>
                     </CardHeader>
-                    <CardContent>
-                        <p className="text-muted-foreground">{feature.description}</p>
+                    <CardContent className="px-5 pb-5">
+                        <p className="text-muted-foreground text-sm">{feature.description}</p>
                     </CardContent>
                 </Card>
             ))}

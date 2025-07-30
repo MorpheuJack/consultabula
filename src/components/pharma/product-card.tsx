@@ -34,16 +34,16 @@ export default function ProductCard({ product }: ProductCardProps) {
             alt={product.name}
             width={300}
             height={300}
-            className="object-cover w-full h-48"
+            className="object-cover w-full h-40 sm:h-48"
             data-ai-hint={`${product.category} medicine`}
           />
         </CardHeader>
         <CardContent className="p-4 flex-grow">
-          <CardTitle className="text-lg font-bold mb-1">{product.name}</CardTitle>
+          <CardTitle className="text-base font-bold mb-1 leading-tight">{product.name}</CardTitle>
           <CardDescription className="text-sm text-muted-foreground">{product.description}</CardDescription>
         </CardContent>
-        <CardFooter className="p-4 flex justify-between items-center">
-          <p className="text-xl font-extrabold text-accent">
+        <CardFooter className="p-4 flex justify-between items-center mt-auto">
+          <p className="text-lg font-extrabold text-accent">
             R$ {product.price.toFixed(2).replace('.', ',')}
           </p>
           <Button size="icon" variant="outline" className="text-primary hover:bg-primary/10" onClick={handleAddToCart}>
