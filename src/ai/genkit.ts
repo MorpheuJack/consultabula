@@ -1,7 +1,15 @@
-import {genkit} from 'genkit';
-import {config} from 'dotenv';
+import { configure, genkit } from 'genkit';
+import { firebase } from '@genkit-ai/firebase';
+import { googleAI } from '@genkit-ai/googleai';
+import { config } from 'dotenv';
 
 config();
 
-// All flows are now using groq-sdk directly, so no plugins are needed for Genkit.
-export const ai = genkit();
+export default configure({
+  plugins: [
+    firebase(),
+    googleAI(),
+  ],
+  logLevel: 'debug',
+  enableTracingAndMetrics: true,
+});
