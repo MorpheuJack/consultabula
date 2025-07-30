@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -10,10 +10,12 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Image as ImageIcon, Loader2, Mic, FileText, Upload, Search } from 'lucide-react';
+import { Image as ImageIcon, Loader2, Mic, FileText, Upload, Search, Camera, X } from 'lucide-react';
 import Image from 'next/image';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { motion } from 'framer-motion';
+import { useToast } from '@/hooks/use-toast';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 const textFormSchema = z.object({
   medicineName: z.string().min(2, {
@@ -31,6 +33,11 @@ export default function InputArea({ onTextSubmit, onImageSubmit, isLoading }: In
   const [activeTab, setActiveTab] = useState('text');
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [imageDataUri, setImageDataUri] = useState<string | null>(null);
+  const [isCameraOpen, setIsCameraOpen] = useState(false);
+  const [hasCameraPermission, setHasCameraPermission] = useState<boolean | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const streamRef = useRef<MediaStream | null>(null);
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof textFormSchema>>({
     resolver: zodResolver(textFormSchema),
@@ -38,6 +45,66 @@ export default function InputArea({ onTextSubmit, onImageSubmit, isLoading }: In
       medicineName: '',
     },
   });
+
+  const stopCamera = () => {
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach(track => track.stop());
+      streamRef.current = null;
+    }
+    if (videoRef.current) {
+      videoRef.current.srcObject = null;
+    }
+  }
+
+  const openCamera = async () => {
+    if (isCameraOpen) {
+      setIsCameraOpen(false);
+      stopCamera();
+      return;
+    }
+
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      streamRef.current = stream;
+      setHasCameraPermission(true);
+      setIsCameraOpen(true);
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+      }
+    } catch (error) {
+      console.error('Error accessing camera:', error);
+      setHasCameraPermission(false);
+      setIsCameraOpen(false);
+      toast({
+        variant: 'destructive',
+        title: 'Acesso à Câmera Negado',
+        description: 'Por favor, habilite a permissão da câmera nas configurações do seu navegador.',
+      });
+    }
+  };
+
+  const takePicture = () => {
+    if (videoRef.current) {
+      const canvas = document.createElement('canvas');
+      canvas.width = videoRef.current.videoWidth;
+      canvas.height = videoRef.current.videoHeight;
+      const context = canvas.getContext('2d');
+      if (context) {
+        context.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
+        const dataUrl = canvas.toDataURL('image/jpeg');
+        setPreviewUrl(dataUrl);
+        setImageDataUri(dataUrl);
+        setIsCameraOpen(false);
+        stopCamera();
+      }
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      stopCamera();
+    };
+  }, []);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -63,6 +130,11 @@ export default function InputArea({ onTextSubmit, onImageSubmit, isLoading }: In
   const buttonVariants = {
     initial: { opacity: 0, y: 10 },
     animate: { opacity: 1, y: 0, transition: { delay: 0.2, duration: 0.3 } },
+  };
+  
+  const clearPreview = () => {
+    setPreviewUrl(null);
+    setImageDataUri(null);
   };
 
   return (
@@ -129,22 +201,64 @@ export default function InputArea({ onTextSubmit, onImageSubmit, isLoading }: In
               </TabsContent>
               <TabsContent value="image" className="mt-0">
                 <form onSubmit={handleImageSubmit} className="space-y-4">
-                    <div className="flex justify-center items-center w-full">
-                        <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-xl cursor-pointer bg-secondary/40 hover:bg-secondary/60 border-white/10 transition-colors duration-300">
-                            {previewUrl ? (
-                                <div className="relative w-full h-full">
-                                    <Image src={previewUrl} alt="Pré-visualização" layout="fill" objectFit="contain" className="rounded-lg p-2"/>
-                                </div>
-                            ) : (
-                                <div className="flex flex-col items-center justify-center pt-5 pb-6 text-muted-foreground">
-                                    <Upload className="w-10 h-10 mb-4" />
-                                    <p className="mb-2 text-base"><span className="font-semibold text-accent">Clique para enviar</span> ou arraste e solte</p>
-                                    <p className="text-sm">PNG, JPG, ou WEBP</p>
-                                </div>
-                            )}
-                            <Input id="dropzone-file" type="file" className="hidden" onChange={handleFileChange} accept="image/png, image/jpeg, image/webp" disabled={isLoading} />
-                        </label>
-                    </div>
+                  {isCameraOpen ? (
+                     <div className="space-y-4">
+                       <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-secondary/40 border-2 border-dashed border-white/10">
+                          <video ref={videoRef} className="w-full h-full object-cover" autoPlay muted playsInline />
+                       </div>
+                       {hasCameraPermission === false && (
+                         <Alert variant="destructive">
+                           <AlertTitle>Acesso à Câmera Necessário</AlertTitle>
+                           <AlertDescription>
+                             Por favor, permita o acesso à câmera para usar esta funcionalidade.
+                           </AlertDescription>
+                         </Alert>
+                       )}
+                       <Button type="button" size="lg" onClick={takePicture} className="w-full bg-primary hover:bg-primary/90 text-lg rounded-xl h-14">
+                         <Camera className="mr-2 h-5 w-5" />
+                         Tirar Foto
+                       </Button>
+                     </div>
+                  ) : (
+                    <>
+                      <div className="flex justify-center items-center w-full">
+                          <div className="flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-xl bg-secondary/40 border-white/10 transition-colors duration-300 relative">
+                              {previewUrl ? (
+                                  <>
+                                      <Image src={previewUrl} alt="Pré-visualização" layout="fill" objectFit="contain" className="rounded-lg p-2"/>
+                                      <Button variant="ghost" size="icon" className="absolute top-2 right-2 bg-black/50 hover:bg-black/70 rounded-full z-10" onClick={clearPreview}>
+                                        <X className="h-5 w-5 text-white"/>
+                                      </Button>
+                                  </>
+                              ) : (
+                                  <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full h-full cursor-pointer hover:bg-secondary/60">
+                                      <div className="flex flex-col items-center justify-center pt-5 pb-6 text-muted-foreground">
+                                          <Upload className="w-10 h-10 mb-4" />
+                                          <p className="mb-2 text-base"><span className="font-semibold text-accent">Clique para enviar</span> ou arraste e solte</p>
+                                          <p className="text-sm">PNG, JPG, ou WEBP</p>
+                                      </div>
+                                      <Input id="dropzone-file" type="file" className="hidden" onChange={handleFileChange} accept="image/png, image/jpeg, image/webp" disabled={isLoading} />
+                                  </label>
+                              )}
+                          </div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-4">
+                          <Button type="button" variant="outline" size="lg" disabled={isLoading} className="text-lg rounded-xl h-14 bg-secondary hover:bg-secondary/80 border-white/10" onClick={openCamera}>
+                              <Camera className="mr-2 h-5 w-5" />
+                              {isCameraOpen ? 'Fechar Câmera' : 'Abrir Câmera'}
+                          </Button>
+                          <label htmlFor="dropzone-file-button" className="w-full">
+                            <Button type="button" asChild size="lg" disabled={isLoading} className="w-full text-lg rounded-xl h-14 bg-secondary hover:bg-secondary/80 border-white/10">
+                                <span>
+                                    <Upload className="mr-2 h-5 w-5" />
+                                    Enviar Arquivo
+                                </span>
+                            </Button>
+                            <Input id="dropzone-file-button" type="file" className="hidden" onChange={handleFileChange} accept="image/png, image/jpeg, image/webp" disabled={isLoading} />
+                          </label>
+                      </div>
+                    </>
+                  )}
                   <motion.div variants={buttonVariants} initial="initial" animate="animate">
                     <Button type="submit" size="lg" disabled={!imageDataUri || isLoading} className="w-full bg-accent hover:bg-accent/90 text-lg rounded-xl h-14">
                       {isLoading && activeTab === 'image' ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
