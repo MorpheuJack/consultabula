@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Search } from 'lucide-react';
 import ScrollFloat from '../ui/scroll-float';
+import SplitText from '../ui/split-text';
 
 export default function Hero() {
   return (
@@ -21,13 +22,18 @@ export default function Hero() {
         }}
     >
         <div className="container mx-auto px-4 z-10 flex flex-col items-center">
-            <ScrollFloat
-                textClassName="text-4xl md:text-5xl lg:text-7xl font-extrabold font-headline leading-tight tracking-tighter text-white"
-                containerClassName='mb-6'
-            >
-                A clareza que você precisa sobre medicamentos, instantaneamente.
-            </ScrollFloat>
-            <p className="mt-4 text-base md:text-lg lg:text-xl text-white/90 max-w-2xl mx-auto">
+            <SplitText
+                as="h1"
+                text="A clareza que você precisa sobre medicamentos, instantaneamente."
+                className="text-4xl md:text-5xl lg:text-7xl font-extrabold font-headline leading-tight tracking-tighter text-white"
+                splitType="words"
+                from={{ opacity: 0, y: 30 }}
+                to={{ opacity: 1, y: 0 }}
+                delay={40}
+                duration={0.8}
+                ease="power3.out"
+            />
+            <p className="mt-6 text-base md:text-lg lg:text-xl text-white/90 max-w-2xl mx-auto">
                 Diga adeus à confusão das bulas. Consulte informações de forma rápida e segura, seja por texto ou imagem.
             </p>
             
