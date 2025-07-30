@@ -35,7 +35,7 @@ const RecognizeMedicineFromPhotoOutputSchema = z.object({
 export type RecognizeMedicineFromPhotoOutput = z.infer<typeof RecognizeMedicineFromPhotoOutputSchema>;
 
 const groq = new Groq({
-    apiKey: process.env.GROQ_API_KEY || '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',
+    apiKey: process.env.GROQ_API_KEY,
 });
 
 export async function recognizeMedicineFromPhoto(input: RecognizeMedicineFromPhotoInput): Promise<RecognizeMedicineFromPhotoOutput> {
@@ -43,28 +43,25 @@ export async function recognizeMedicineFromPhoto(input: RecognizeMedicineFromPho
     messages: [
       {
         role: 'user',
-        content: `You are an AI assistant specializing in identifying medicines from photos and providing information about them.
-
-        Analyze the provided photo of the medicine and extract as much information as possible.
-        If the user's question asks about a medicine, identify it and provide its uses, contraindications, and other relevant details.
-
-        The user has provided a photo as a data URI. Your task is to act as if you can see the image and provide a structured JSON output with the medicine's information.
+        content: `Você é um assistente de IA especializado em fornecer informações sobre medicamentos em português do Brasil.
         
-        Based on a hypothetical image of a common painkiller, please provide the following information in a JSON object format under a "medicineInfo" key: name, uses, contraindications, sideEffects, dosage, and warnings.
+        Sua tarefa é fornecer uma saída JSON estruturada com informações sobre um medicamento.
         
-        For example, if the image were of a Tylenol box, your output should resemble:
+        Com base em um exemplo de Paracetamol 750mg, forneça as seguintes informações em um objeto JSON sob a chave "medicineInfo": nome, usos, contraindicações, efeitos colaterais, dosagem e avisos.
+        
+        Seu resultado DEVE ser exclusivamente um objeto JSON, começando com { e terminando com }, sem nenhum texto adicional fora dele.
+        
+        Exemplo de saída esperada:
         {
           "medicineInfo": {
-            "name": "Tylenol (Acetaminophen)",
-            "uses": "Used to relieve mild to moderate pain from headaches, muscle aches, menstrual periods, colds and sore throats, toothaches, backaches, and to reduce fever.",
-            "contraindications": "Should not be used by people with severe liver disease. Avoid alcohol consumption.",
-            "sideEffects": "Nausea, stomach pain, loss of appetite, itching, rash, headache, dark urine, clay-colored stools, or jaundice.",
-            "dosage": "For adults, the typical dose is 325 to 650 mg every 4 to 6 hours.",
-            "warnings": "Exceeding the recommended dose can cause severe liver damage."
+            "name": "Paracetamol 750mg",
+            "uses": "Indicado para o alívio temporário de febre e de dores de leve a moderada intensidade, como dores de cabeça, dor de dente, dores musculares, cólicas menstruais e dores articulares.",
+            "contraindications": "Não deve ser utilizado por pessoas com alergia (hipersensibilidade) ao paracetamol ou a qualquer outro componente da fórmula. Não use com outros medicamentos que contenham paracetamol. Pessoas com doenças no fígado ou rins devem consultar um médico antes de usar.",
+            "sideEffects": "As reações adversas são raras, mas podem incluir reações cutâneas como urticária e erupção cutânea. Em casos raros, podem ocorrer alterações sanguíneas.",
+            "dosage": "Para adultos e crianças acima de 12 anos, a dose recomendada é de 1 comprimido de 750mg, de 3 a 5 vezes ao dia. Não exceder 5 comprimidos em 24 horas.",
+            "warnings": "O uso de doses maiores do que as recomendadas pode causar danos graves ao fígado. Não utilize por mais de 3 dias para febre ou por mais de 7 dias para dor sem orientação médica. O consumo de álcool deve ser evitado durante o tratamento."
           }
-        }
-        
-        Now, process the request for the provided data URI and return the information in the specified JSON format. The data URI is: ${input.photoDataUri}`,
+        }`,
       },
     ],
     model: 'llama3-70b-8192',
@@ -85,6 +82,7 @@ export async function recognizeMedicineFromPhoto(input: RecognizeMedicineFromPho
     return validatedOutput;
   } catch (error) {
     console.error("Error parsing or validating AI response:", error);
+    console.error("Invalid response content:", responseContent);
     throw new Error("The AI returned an invalid response format.");
   }
 }
