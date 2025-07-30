@@ -3,7 +3,7 @@
 
 import { HeartPulse, Search, SlidersHorizontal, BarChart } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
-import ScrollFloat from '../ui/scroll-float';
+import ScrollReveal from '../ui/scroll-reveal';
 import dynamic from 'next/dynamic';
 
 const SplitText = dynamic(() => import('../ui/split-text-client'), { ssr: false });
@@ -47,9 +47,12 @@ export default function Features() {
                 duration={0.6}
                 ease="power3.out"
             />
-            <p className="mt-4 text-base md:text-lg text-muted-foreground max-w-3xl mx-auto">
-                Desenvolvemos uma ferramenta completa para que você tenha acesso rápido e seguro a informações sobre medicamentos, na palma da sua mão.
-            </p>
+            <ScrollReveal
+              containerClassName="max-w-3xl mx-auto mt-4"
+              textClassName="text-base md:text-lg text-muted-foreground"
+            >
+              Desenvolvemos uma ferramenta completa para que você tenha acesso rápido e seguro a informações sobre medicamentos, na palma da sua mão.
+            </ScrollReveal>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {featureData.map((feature, index) => (
