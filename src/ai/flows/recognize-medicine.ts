@@ -41,32 +41,38 @@ const groq = new Groq({
 export async function recognizeMedicineFromPhoto(input: RecognizeMedicineFromPhotoInput): Promise<RecognizeMedicineFromPhotoOutput> {
   const completion = await groq.chat.completions.create({
     messages: [
-      {
-        role: 'user',
-        content: `Você é um assistente de IA especializado em fornecer informações sobre medicamentos em português do Brasil.
-        
-        Sua tarefa é fornecer uma saída JSON estruturada com informações sobre um medicamento.
-        
-        Com base em um exemplo de Paracetamol 750mg, forneça as seguintes informações em um objeto JSON sob a chave "medicineInfo": nome, usos, contraindicações, efeitos colaterais, dosagem e avisos.
-        
-        Seu resultado DEVE ser exclusivamente um objeto JSON, começando com { e terminando com }, sem nenhum texto adicional fora dele.
-        
-        Exemplo de saída esperada:
         {
-          "medicineInfo": {
-            "name": "Paracetamol 750mg",
-            "uses": "Indicado para o alívio temporário de febre e de dores de leve a moderada intensidade, como dores de cabeça, dor de dente, dores musculares, cólicas menstruais e dores articulares.",
-            "contraindications": "Não deve ser utilizado por pessoas com alergia (hipersensibilidade) ao paracetamol ou a qualquer outro componente da fórmula. Não use com outros medicamentos que contenham paracetamol. Pessoas com doenças no fígado ou rins devem consultar um médico antes de usar.",
-            "sideEffects": "As reações adversas são raras, mas podem incluir reações cutâneas como urticária e erupção cutânea. Em casos raros, podem ocorrer alterações sanguíneas.",
-            "dosage": "Para adultos e crianças acima de 12 anos, a dose recomendada é de 1 comprimido de 750mg, de 3 a 5 vezes ao dia. Não exceder 5 comprimidos em 24 horas.",
-            "warnings": "O uso de doses maiores do que as recomendadas pode causar danos graves ao fígado. Não utilize por mais de 3 dias para febre ou por mais de 7 dias para dor sem orientação médica. O consumo de álcool deve ser evitado durante o tratamento."
-          }
-        }`,
-      },
+            role: 'system',
+            content: `Você é um assistente de IA especialista em farmácia, e sua função é fornecer informações detalhadas sobre medicamentos em português do Brasil. Sua resposta DEVE ser um objeto JSON válido, sem nenhum texto adicional fora dele.
+            Analise a imagem do medicamento fornecida pelo usuário para identificar o nome e gerar um resumo completo.
+            O objeto JSON de saída deve ter uma única chave "medicineInfo". O valor dessa chave deve ser outro objeto contendo as seguintes chaves:
+            - "name": (String) Identifique e retorne o nome do medicamento na imagem.
+            - "uses": (String) Descreva os usos primários e secundários do medicamento de forma clara.
+            - "contraindications": (String) Liste todas as contraindicações conhecidas, incluindo condições médicas e interações medicamentosas perigosas.
+            - "sideEffects": (String, opcional) Detalhe os efeitos colaterais mais comuns e também os mais raros, mas graves.
+            - "dosage": (String, opcional) Forneça informações sobre a dosagem recomendada para diferentes faixas etárias (adultos, crianças), se aplicável.
+            - "warnings": (String, opcional) Inclua avisos importantes, precauções, informações sobre superdosagem e o que fazer em caso de esquecimento de uma dose.
+            Sua resposta deve ser exclusivamente um objeto JSON, começando com { e terminando com }.`
+        },
+        {
+            role: 'user',
+            content: [
+                {
+                    type: 'image_url',
+                    image_url: {
+                        url: input.photoDataUri,
+                    },
+                },
+                {
+                    type: 'text',
+                    text: 'Por favor, identifique o medicamento nesta imagem e forneça as informações sobre ele no formato JSON solicitado.'
+                }
+            ],
+        },
     ],
-    model: 'llama3-70b-8192',
+    model: 'gemma2-9b-it',
     temperature: 0,
-    max_tokens: 1024,
+    max_tokens: 2048,
     top_p: 1,
     response_format: { type: 'json_object' },
   });
