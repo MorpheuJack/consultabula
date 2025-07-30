@@ -63,7 +63,6 @@ export default function InputArea({ onTextSubmit, onImageSubmit, isLoading }: In
       return;
     }
 
-    // Request camera permission only when the button is clicked
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
         toast({
             variant: 'destructive',
@@ -78,7 +77,7 @@ export default function InputArea({ onTextSubmit, onImageSubmit, isLoading }: In
       streamRef.current = stream;
       setHasCameraPermission(true);
       setIsCameraOpen(true);
-      // We need a small delay to allow the video element to be rendered
+      
       setTimeout(() => {
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
@@ -114,7 +113,6 @@ export default function InputArea({ onTextSubmit, onImageSubmit, isLoading }: In
   };
 
   useEffect(() => {
-    // This effect ensures the stream is stopped when the component unmounts.
     return () => {
       stopCamera();
     };
@@ -150,6 +148,8 @@ export default function InputArea({ onTextSubmit, onImageSubmit, isLoading }: In
     setPreviewUrl(null);
     setImageDataUri(null);
   };
+
+  const secondaryButtonClasses = "text-base sm:text-lg rounded-xl h-14 bg-secondary/80 text-secondary-foreground hover:bg-secondary/100 transition-all duration-300 ease-in-out shadow-sm hover:shadow-lg focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent";
 
   return (
     <motion.div 
@@ -257,12 +257,12 @@ export default function InputArea({ onTextSubmit, onImageSubmit, isLoading }: In
                           </div>
                       </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                          <Button type="button" variant="outline" size="lg" disabled={isLoading} className="text-base sm:text-lg rounded-xl h-14 bg-card hover:bg-secondary/80" onClick={openCamera}>
+                          <Button type="button" variant="outline" size="lg" disabled={isLoading} className={secondaryButtonClasses} onClick={openCamera}>
                               <Camera className="mr-2 h-5 w-5" />
                               {isCameraOpen ? 'Fechar' : 'Câmera'}
                           </Button>
                           <label htmlFor="dropzone-file-button" className="w-full">
-                            <Button type="button" asChild size="lg" disabled={isLoading} className="w-full text-base sm:text-lg rounded-xl h-14 bg-card hover:bg-secondary/80">
+                            <Button type="button" asChild size="lg" disabled={isLoading} className={`w-full ${secondaryButtonClasses}`}>
                                 <span className="flex items-center justify-center">
                                     <Upload className="mr-2 h-5 w-5" />
                                     Enviar
@@ -290,5 +290,3 @@ export default function InputArea({ onTextSubmit, onImageSubmit, isLoading }: In
     </motion.div>
   );
 }
-
-    

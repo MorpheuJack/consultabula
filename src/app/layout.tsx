@@ -1,10 +1,13 @@
-import type {Metadata} from 'next';
+  import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
   title: 'Consulta Bula',
   description: 'Consulte informações de medicamentos por texto ou imagem. Rápido, seguro e confiável.',
+  icons: {
+    icon: '/llogo.png',
+  },
 };
 
 export default function RootLayout({
