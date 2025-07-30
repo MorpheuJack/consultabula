@@ -8,7 +8,7 @@ import { ArrowRight, Pill } from 'lucide-react';
 
 export default function Hero() {
   return (
-    <section className="relative w-full h-[calc(100svh-88px)] flex items-center bg-background overflow-hidden">
+    <section className="relative w-full h-[calc(100svh-88px)] flex items-center bg-secondary overflow-hidden">
         <div className="absolute inset-y-0 right-0 w-1/2">
              <Image
                 src="https://placehold.co/1200x1200.png"
@@ -19,7 +19,7 @@ export default function Hero() {
                 data-ai-hint="pharmacist professional"
                 priority
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/70 to-transparent"></div>
         </div>
 
         <div className="container mx-auto px-4 z-10">
