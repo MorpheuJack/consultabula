@@ -63,14 +63,27 @@ export default function InputArea({ onTextSubmit, onImageSubmit, isLoading }: In
       return;
     }
 
+    // Request camera permission only when the button is clicked
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        toast({
+            variant: 'destructive',
+            title: 'Dispositivo não suportado',
+            description: 'Seu navegador não suporta o acesso à câmera.',
+        });
+        return;
+    }
+
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ video: true });
       streamRef.current = stream;
       setHasCameraPermission(true);
       setIsCameraOpen(true);
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-      }
+      // We need a small delay to allow the video element to be rendered
+      setTimeout(() => {
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream;
+        }
+      }, 100);
     } catch (error) {
       console.error('Error accessing camera:', error);
       setHasCameraPermission(false);
@@ -101,6 +114,7 @@ export default function InputArea({ onTextSubmit, onImageSubmit, isLoading }: In
   };
 
   useEffect(() => {
+    // This effect ensures the stream is stopped when the component unmounts.
     return () => {
       stopCamera();
     };
@@ -276,3 +290,5 @@ export default function InputArea({ onTextSubmit, onImageSubmit, isLoading }: In
     </motion.div>
   );
 }
+
+    
