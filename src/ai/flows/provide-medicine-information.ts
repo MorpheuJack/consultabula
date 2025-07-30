@@ -150,7 +150,6 @@ O objeto JSON deve conter uma única chave principal: \`medicamento\`. O valor d
       }
     ],
     model: 'meta-llama/llama-4-scout-17b-16e-instruct',
-    temperature: 0,
     max_tokens: 4096,
     top_p: 1,
   });

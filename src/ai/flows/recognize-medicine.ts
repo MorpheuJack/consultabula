@@ -80,7 +80,6 @@ export async function recognizeMedicineFromPhoto(input: RecognizeMedicineFromPho
         },
     ],
     model: 'meta-llama/llama-4-scout-17b-16e-instruct',
-    temperature: 0,
     max_tokens: 4096,
     top_p: 1,
   });
