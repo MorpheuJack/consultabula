@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import { Menu, Pill, ShoppingCart } from 'lucide-react';
 import { Button } from '../ui/button';
-import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '../ui/sheet';
 
 export default function Header() {
   return (
@@ -45,6 +45,9 @@ export default function Header() {
                     </Button>
                 </SheetTrigger>
                 <SheetContent side="right" className="bg-background/90 backdrop-blur-sm text-foreground">
+                    <SheetHeader>
+                        <SheetTitle className="sr-only">Menu de Navegação</SheetTitle>
+                    </SheetHeader>
                     <nav className="flex flex-col gap-6 mt-12 text-lg">
                         <Link href="/#features" className="hover:text-accent transition-colors">Funcionalidades</Link>
                         <Link href="/shop" className="hover:text-accent transition-colors">Loja</Link>
