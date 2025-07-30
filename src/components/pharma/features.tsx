@@ -45,7 +45,7 @@ export default function Features() {
             {featureData.map((feature, index) => (
                 <Card key={index} className="bg-card border-none shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2">
                     <CardHeader>
-                        <div className="flex-shrink-0 bg-primary/10 text-primary p-4 rounded-lg w-fit mb-4">
+                        <div className="flex-shrink-0 bg-accent/10 text-accent p-4 rounded-lg w-fit mb-4">
                             <feature.icon className="h-8 w-8" />
                         </div>
                         <CardTitle className="text-xl font-bold">{feature.title}</CardTitle>
