@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -5,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Textarea } from '@/components/ui/textarea';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
@@ -61,13 +62,7 @@ export default function InputArea({ onTextSubmit, onImageSubmit, isLoading }: In
 
   return (
     <Card className="shadow-lg">
-      <CardHeader>
-        <CardTitle>Como podemos ajudar?</CardTitle>
-        <CardDescription>
-          Escolha uma das opções abaixo para obter informações sobre um medicamento.
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
+      <CardContent className="p-6">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="text"><FileText className="mr-2 h-4 w-4" />Texto</TabsTrigger>
@@ -85,7 +80,7 @@ export default function InputArea({ onTextSubmit, onImageSubmit, isLoading }: In
                 </TooltipProvider>
             </TabsTrigger>
           </TabsList>
-          <TabsContent value="text" className="mt-4">
+          <TabsContent value="text" className="mt-6">
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(() => onTextSubmit(new FormData(document.getElementById('text-form') as HTMLFormElement)))}
@@ -116,7 +111,7 @@ export default function InputArea({ onTextSubmit, onImageSubmit, isLoading }: In
               </form>
             </Form>
           </TabsContent>
-          <TabsContent value="image" className="mt-4">
+          <TabsContent value="image" className="mt-6">
             <form onSubmit={handleImageSubmit} className="space-y-4">
                 <div className="flex justify-center items-center w-full">
                     <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-lg cursor-pointer bg-secondary/50 hover:bg-secondary/70 border-border">

@@ -1,10 +1,12 @@
+
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { type MedicineInfo } from '@/lib/types';
 import { getMedicineInfoFromImage, getMedicineInfoFromText } from '@/app/actions';
 import Header from '@/components/layout/header';
+import Hero from '@/components/pharma/hero';
 import InputArea from '@/components/pharma/input-area';
 import MedicineInfoCard from '@/components/pharma/medicine-info-card';
 import Disclaimer from '@/components/pharma/disclaimer';
@@ -13,6 +15,7 @@ export default function Home() {
   const [medicineInfo, setMedicineInfo] = useState<MedicineInfo | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const inputAreaRef = useRef<HTMLDivElement>(null);
 
   const handleTextSubmit = async (formData: FormData) => {
     setIsLoading(true);
@@ -38,21 +41,28 @@ export default function Home() {
     setIsLoading(false);
   };
 
+  const scrollToInput = () => {
+    inputAreaRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground font-body">
       <Header />
-      <main className="flex-grow container mx-auto px-4 py-8 md:py-12">
-        <div className="max-w-3xl mx-auto space-y-8">
-          <section className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold font-headline text-primary mb-2">PharmaInfo AI</h1>
-            <p className="text-lg md:text-xl text-muted-foreground">
-              Tire suas dúvidas sobre medicamentos de forma rápida e fácil.
-            </p>
-          </section>
-          <InputArea onTextSubmit={handleTextSubmit} onImageSubmit={handleImageSubmit} isLoading={isLoading} />
-          <div className="mt-8 min-h-[300px]">
-            {isLoading && <MedicineInfoCard.Skeleton />}
-            {medicineInfo && !isLoading && <MedicineInfoCard info={medicineInfo} />}
+      <main className="flex-grow">
+        <Hero onGetStartedClick={scrollToInput} />
+        <div ref={inputAreaRef} className="container mx-auto px-4 py-8 md:py-12">
+          <div className="max-w-3xl mx-auto space-y-8">
+            <section className="text-center">
+              <h2 className="text-3xl md:text-4xl font-bold font-headline text-primary mb-2">Como podemos ajudar?</h2>
+              <p className="text-lg text-muted-foreground">
+                Escolha uma das opções abaixo para obter informações sobre um medicamento.
+              </p>
+            </section>
+            <InputArea onTextSubmit={handleTextSubmit} onImageSubmit={handleImageSubmit} isLoading={isLoading} />
+            <div className="mt-8 min-h-[300px]">
+              {isLoading && <MedicineInfoCard.Skeleton />}
+              {medicineInfo && !isLoading && <MedicineInfoCard info={medicineInfo} />}
+            </div>
           </div>
         </div>
       </main>
