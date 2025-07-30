@@ -2,6 +2,7 @@
 import Features from '@/components/pharma/features';
 import Hero from '@/components/pharma/hero';
 import Header from '@/components/layout/header';
+import ScrollVelocity from '@/components/ui/scroll-velocity';
 
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
       <Header />
       <main className="flex-grow">
         <Hero />
+        <ScrollVelocity texts={['Consulta Bula', 'PharmaInfo AI']} />
         <Features />
       </main>
     </div>
