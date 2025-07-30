@@ -57,7 +57,7 @@ export default function AppPage() {
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground font-body antialiased">
        <Header />
-       <main className="flex-grow container mx-auto px-4 py-8 md:py-12 flex flex-col items-center">
+       <main className="flex-grow container mx-auto px-4 py-8 md:py-12 flex flex-col items-center pt-32">
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
