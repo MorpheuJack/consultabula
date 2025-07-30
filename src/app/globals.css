@@ -9,7 +9,7 @@ body {
 @layer base {
   :root {
     --background: 255 100% 100%; /* White */
-    --foreground: 224 71% 4%; /* Dark Blue */
+    --foreground: 174 70% 36%; /* Teal (#26A69A) - Main green color */
     
     --card: 210 29% 97%; /* Light grey (#F0F4F8) */
     --card-foreground: 224 71% 4%;
@@ -47,7 +47,7 @@ body {
 
   .dark {
     --background: 224 71% 4%;
-    --foreground: 210 20% 98%;
+    --foreground: 174 70% 48%;
     --card: 223 47% 11%;
     --card-foreground: 210 20% 98%;
     --popover: 224 71% 4%;
