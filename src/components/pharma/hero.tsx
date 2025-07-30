@@ -26,7 +26,17 @@ export default function Hero() {
 
   return (
     <section 
-        className="relative w-full min-h-screen flex flex-col items-center justify-center text-center p-4 bg-dark-green"
+        className="relative w-full min-h-screen flex flex-col items-center justify-center text-center p-4"
+        style={{
+            background: 'linear-gradient(135deg, #1D976C 0%, #93F9B9 100%)',
+            backgroundImage: `
+                linear-gradient(to right bottom, rgba(29, 151, 108, 0.9), rgba(147, 249, 185, 0.9)), 
+                url('/background-icons.svg')
+            `,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundAttachment: 'fixed',
+        }}
     >
         <div className="container mx-auto px-4 z-10 flex flex-col items-center">
             <SplitText
