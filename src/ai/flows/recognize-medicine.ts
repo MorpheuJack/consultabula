@@ -57,7 +57,6 @@ const prompt = ai.definePrompt({
   input: {schema: RecognizeMedicineFromPhotoInputSchema},
   output: {schema: RecognizeMedicineFromPhotoOutputSchema},
   tools: [needsMoreInfoTool],
-  model: 'llama3-70b-8192',
   prompt: `You are an AI assistant specializing in identifying medicines from photos and providing information about them.
 
   Analyze the provided photo of the medicine and extract as much information as possible.
