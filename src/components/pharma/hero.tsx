@@ -4,7 +4,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Pill } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 export default function Hero() {
   return (
@@ -24,9 +24,6 @@ export default function Hero() {
 
         <div className="container mx-auto px-4 z-10">
             <div className="max-w-xl text-left">
-                <div className="p-4 bg-primary/10 rounded-full w-fit mb-6 shadow-md">
-                    <Pill className="h-8 w-8 text-primary" />
-                </div>
                 <h1 className="text-5xl lg:text-7xl font-extrabold font-headline text-foreground leading-tight tracking-tighter mb-6">
                     Bula de Remédio na Palma da Mão.
                 </h1>
