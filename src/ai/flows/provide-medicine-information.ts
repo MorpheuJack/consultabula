@@ -46,15 +46,20 @@ export async function provideMedicineInformation(
     messages: [
       {
         role: 'system',
-        content: `You are a helpful AI assistant providing information about medicines. Your response MUST be a valid JSON object.
-        Provide a summary of the medicine's uses, contraindications, and other relevant details based on the provided medicine name.
-        The JSON object must have a single key "medicineInformation" which contains an object with the following keys: "uses", "contraindications", and optionally "sideEffects", "dosage", and "warnings".
-        Do not include any text outside of the JSON object.`
+        content: `Você é um assistente de IA especialista em farmácia, e sua função é fornecer informações detalhadas sobre medicamentos em português do Brasil. Sua resposta DEVE ser um objeto JSON válido, sem nenhum texto adicional fora dele.
+        Analise o nome do medicamento e os detalhes adicionais fornecidos pelo usuário para gerar um resumo completo.
+        O objeto JSON de saída deve ter uma única chave "medicineInformation". O valor dessa chave deve ser outro objeto contendo as seguintes chaves:
+        - "uses": (String) Descreva os usos primários e secundários do medicamento de forma clara.
+        - "contraindications": (String) Liste todas as contraindicações conhecidas, incluindo condições médicas e interações medicamentosas perigosas.
+        - "sideEffects": (String, opcional) Detalhe os efeitos colaterais mais comuns e também os mais raros, mas graves.
+        - "dosage": (String, opcional) Forneça informações sobre a dosagem recomendada para diferentes faixas etárias (adultos, crianças), se aplicável.
+        - "warnings": (String, opcional) Inclua avisos importantes, precauções, informações sobre superdosagem e o que fazer em caso de esquecimento de uma dose.
+        Sua resposta deve ser exclusivamente um objeto JSON, começando com { e terminando com }.`
       },
       {
         role: 'user',
-        content: `Medicine Name: ${input.medicineName}
-        Additional Details: ${input.additionalDetails || 'N/A'}`
+        content: `Nome do Medicamento: ${input.medicineName}
+        Detalhes Adicionais: ${input.additionalDetails || 'Nenhum'}`
       }
     ],
     model: 'llama3-70b-8192',
