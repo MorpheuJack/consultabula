@@ -13,8 +13,8 @@ export default function Hero() {
              <Image
                 src="/consulta.png"
                 alt="Profissional de saúde sorrindo"
-                layout="fill"
-                objectFit="cover"
+                fill
+                style={{objectFit: 'cover'}}
                 className="opacity-60"
                 data-ai-hint="pharmacist professional"
                 priority
@@ -23,7 +23,7 @@ export default function Hero() {
         </div>
 
         <div className="container mx-auto px-4 z-10">
-            <div className="max-w-xl">
+            <div className="max-w-xl text-left">
                 <div className="p-4 bg-primary/10 rounded-full w-fit mb-6 shadow-md">
                     <Pill className="h-8 w-8 text-primary" />
                 </div>
