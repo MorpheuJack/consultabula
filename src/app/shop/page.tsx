@@ -1,13 +1,28 @@
 
+'use client';
+
+import { useState, useEffect } from 'react';
 import Header from '@/components/layout/header';
 import ProductCard from '@/components/pharma/product-card';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import { products } from '@/lib/products';
+import { type Product } from '@/lib/types';
 import { ChevronDown, Search } from 'lucide-react';
 
 export default function ShopPage() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>(products);
+
+  useEffect(() => {
+    const results = products.filter(product =>
+      product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.description.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredProducts(results);
+  }, [searchTerm]);
+
   return (
     <div 
       className="flex flex-col min-h-screen text-white font-body antialiased"
@@ -33,6 +48,8 @@ export default function ShopPage() {
                         type="search"
                         placeholder="Pesquisar produtos..."
                         className="w-full md:w-64 lg:w-80 h-12 pl-12 pr-4 rounded-full bg-white/20 text-white placeholder:text-white/70 border-0 focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-0 transition-all"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
                     />
                 </div>
                 <DropdownMenu>
@@ -50,7 +67,7 @@ export default function ShopPage() {
             </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {products.map((product) => (
+          {filteredProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
