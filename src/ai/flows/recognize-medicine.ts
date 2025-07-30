@@ -38,6 +38,15 @@ const groq = new Groq({
     apiKey: process.env.GROQ_API_KEY,
 });
 
+function extractJson(text: string): string | null {
+  const jsonRegex = /```json\s*([\s\S]*?)\s*```|({[\s\S]*}|\[[\s\S]*\])/;
+  const match = text.match(jsonRegex);
+  if (match) {
+    return match[1] || match[2];
+  }
+  return null;
+}
+
 export async function recognizeMedicineFromPhoto(input: RecognizeMedicineFromPhotoInput): Promise<RecognizeMedicineFromPhotoOutput> {
   const completion = await groq.chat.completions.create({
     messages: [
@@ -81,8 +90,14 @@ export async function recognizeMedicineFromPhoto(input: RecognizeMedicineFromPho
     throw new Error('Failed to get a response from the model.');
   }
 
+  const jsonString = extractJson(responseContent);
+  if (!jsonString) {
+      console.error("No JSON found in AI response:", responseContent);
+      throw new Error("The AI returned an invalid response format.");
+  }
+
   try {
-    const parsedJson = JSON.parse(responseContent);
+    const parsedJson = JSON.parse(jsonString);
     const validatedOutput = RecognizeMedicineFromPhotoOutputSchema.parse(parsedJson);
     return validatedOutput;
   } catch (error) {
