@@ -8,50 +8,41 @@ body {
 
 @layer base {
   :root {
-    --background: 224 71% 4%; /* Azul escuro/Preto */
-    --foreground: 210 20% 98%; /* Quase branco */
+    --background: 210 29% 97%; /* Light grey (#F0F4F8) */
+    --foreground: 224 71% 4%; /* Dark Blue */
     
-    --card: 223 47% 11%; /* Azul escuro mais claro */
-    --card-foreground: 210 20% 98%;
+    --card: 255 100% 100%; /* White */
+    --card-foreground: 224 71% 4%;
 
-    --popover: 224 71% 4%;
-    --popover-foreground: 210 20% 98%;
+    --popover: 255 100% 100%;
+    --popover-foreground: 224 71% 4%;
     
-    --primary: 217 91% 60%; /* Azul vibrante */
-    --primary-foreground: 210 20% 98%;
+    --primary: 207 82% 71%; /* Soft blue (#64B5F6) */
+    --primary-foreground: 224 71% 4%;
 
-    --secondary: 215 28% 17%; /* Azul acinzentado */
-    --secondary-foreground: 210 20% 98%;
+    --secondary: 210 29% 92%; /* Lighter grey */
+    --secondary-foreground: 224 71% 4%;
 
-    --muted: 215 28% 17%;
-    --muted-foreground: 220 10% 65%; /* Cinza claro para texto secundário */
+    --muted: 210 29% 92%;
+    --muted-foreground: 220 10% 45%; /* Grey for text */
     
-    --accent: 168 83% 48%; /* Verde/Teal para destaque */
-    --accent-foreground: 210 20% 98%;
+    --accent: 174 60% 44%; /* Teal (#26A69A) */
+    --accent-foreground: 210 20% 98%; /* Almost white */
 
-    --destructive: 0 72% 51%; /* Vermelho para alertas */
+    --destructive: 0 72% 51%; /* Red for alerts */
     --destructive-foreground: 210 20% 98%;
 
-    --border: 215 28% 22%; /* Borda sutil */
-    --input: 215 28% 17%;
-    --ring: 217 91% 60%;
+    --border: 215 28% 88%; /* Subtle border */
+    --input: 215 28% 94%;
+    --ring: 207 82% 71%;
 
     --radius: 0.75rem;
 
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
+    --chart-1: 207 82% 71%;
+    --chart-2: 174 60% 44%;
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
-
-    --sidebar-background: 224 71% 4%;
-    --sidebar-foreground: 210 20% 98%;
-    --sidebar-primary: 217 91% 60%;
-    --sidebar-primary-foreground: 210 20% 98%;
-    --sidebar-accent: 215 28% 17%;
-    --sidebar-accent-foreground: 210 20% 98%;
-    --sidebar-border: 215 28% 17%;
-    --sidebar-ring: 217 91% 60%;
   }
 
   .dark {
@@ -79,14 +70,6 @@ body {
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
-    --sidebar-background: 224 71% 4%;
-    --sidebar-foreground: 210 20% 98%;
-    --sidebar-primary: 217 91% 60%;
-    --sidebar-primary-foreground: 210 20% 98%;
-    --sidebar-accent: 215 28% 17%;
-    --sidebar-accent-foreground: 210 20% 98%;
-    --sidebar-border: 215 28% 17%;
-    --sidebar-ring: 217 91% 60%;
   }
 }
 

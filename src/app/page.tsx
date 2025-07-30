@@ -41,7 +41,6 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground font-body antialiased">
-      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-gray-900 via-gray-950 to-black -z-10" />
       <Header />
       <main className="flex-grow container mx-auto px-4 py-8 md:py-12 flex flex-col items-center justify-center">
         <motion.div
@@ -50,10 +49,10 @@ export default function Home() {
           transition={{ duration: 0.5 }}
           className="w-full max-w-3xl mx-auto space-y-8 text-center"
         >
-          <h1 className="text-5xl lg:text-7xl font-extrabold font-headline text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-300 leading-tight tracking-tighter">
+          <h1 className="text-5xl lg:text-7xl font-extrabold font-headline text-primary leading-tight tracking-tighter">
             PharmaInfo AI
           </h1>
-          <p className="text-lg lg:text-xl text-slate-400 max-w-2xl mx-auto">
+          <p className="text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
             Sua saúde, simplificada. Obtenha informações claras e confiáveis sobre medicamentos por texto ou imagem.
           </p>
         </motion.div>

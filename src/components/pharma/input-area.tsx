@@ -144,10 +144,10 @@ export default function InputArea({ onTextSubmit, onImageSubmit, isLoading }: In
       transition={{ duration: 0.5, delay: 0.2 }}
       className="w-full"
     >
-      <Card className="bg-card/50 backdrop-blur-sm border-white/10 shadow-2xl shadow-black/20 rounded-2xl">
+      <Card className="bg-card shadow-lg rounded-2xl border">
         <CardContent className="p-2">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-3 bg-transparent p-1 h-12">
+            <TabsList className="grid w-full grid-cols-3 bg-secondary p-1 h-12">
               <TabsTrigger value="text" className="rounded-lg text-lg data-[state=active]:bg-accent data-[state=active]:text-accent-foreground"><FileText className="mr-2 h-5 w-5" />Texto</TabsTrigger>
               <TabsTrigger value="image" className="rounded-lg text-lg data-[state=active]:bg-accent data-[state=active]:text-accent-foreground"><ImageIcon className="mr-2 h-5 w-5" />Imagem</TabsTrigger>
               <TabsTrigger value="voice" disabled className="rounded-lg text-lg">
@@ -181,7 +181,7 @@ export default function InputArea({ onTextSubmit, onImageSubmit, isLoading }: In
                                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                                 <Input
                                 placeholder="Digite o nome do medicamento. Ex: Paracetamol 500mg"
-                                className="resize-none pl-12 h-14 text-lg bg-secondary/60 border-white/10 rounded-xl"
+                                className="resize-none pl-12 h-14 text-lg bg-background rounded-xl"
                                 {...field}
                                 />
                             </div>
@@ -203,7 +203,7 @@ export default function InputArea({ onTextSubmit, onImageSubmit, isLoading }: In
                 <form onSubmit={handleImageSubmit} className="space-y-4">
                   {isCameraOpen ? (
                      <div className="space-y-4">
-                       <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-secondary/40 border-2 border-dashed border-white/10">
+                       <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-secondary border-2 border-dashed">
                           <video ref={videoRef} className="w-full h-full object-cover" autoPlay muted playsInline />
                        </div>
                        {hasCameraPermission === false && (
@@ -222,7 +222,7 @@ export default function InputArea({ onTextSubmit, onImageSubmit, isLoading }: In
                   ) : (
                     <>
                       <div className="flex justify-center items-center w-full">
-                          <div className="flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-xl bg-secondary/40 border-white/10 transition-colors duration-300 relative">
+                          <div className="flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-xl bg-secondary transition-colors duration-300 relative">
                               {previewUrl ? (
                                   <>
                                       <Image src={previewUrl} alt="Pré-visualização" layout="fill" objectFit="contain" className="rounded-lg p-2"/>
@@ -243,12 +243,12 @@ export default function InputArea({ onTextSubmit, onImageSubmit, isLoading }: In
                           </div>
                       </div>
                       <div className="grid grid-cols-2 gap-4">
-                          <Button type="button" variant="outline" size="lg" disabled={isLoading} className="text-lg rounded-xl h-14 bg-secondary hover:bg-secondary/80 border-white/10" onClick={openCamera}>
+                          <Button type="button" variant="outline" size="lg" disabled={isLoading} className="text-lg rounded-xl h-14 bg-card hover:bg-secondary/80" onClick={openCamera}>
                               <Camera className="mr-2 h-5 w-5" />
                               {isCameraOpen ? 'Fechar Câmera' : 'Abrir Câmera'}
                           </Button>
                           <label htmlFor="dropzone-file-button" className="w-full">
-                            <Button type="button" asChild size="lg" disabled={isLoading} className="w-full text-lg rounded-xl h-14 bg-secondary hover:bg-secondary/80 border-white/10">
+                            <Button type="button" asChild size="lg" disabled={isLoading} className="w-full text-lg rounded-xl h-14 bg-card hover:bg-secondary/80">
                                 <span>
                                     <Upload className="mr-2 h-5 w-5" />
                                     Enviar Arquivo
