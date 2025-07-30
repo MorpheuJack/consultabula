@@ -5,6 +5,7 @@ import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText as GSAPSplitText } from "gsap/SplitText";
+import React from "react";
 
 if (typeof window !== "undefined") {
     gsap.registerPlugin(ScrollTrigger, GSAPSplitText);
@@ -12,6 +13,7 @@ if (typeof window !== "undefined") {
 
 type SplitTextProps = {
     text: string;
+    as?: React.ElementType;
     className?: string;
     delay?: number;
     duration?: number;
@@ -27,6 +29,7 @@ type SplitTextProps = {
 
 const SplitText = ({
   text,
+  as: Component = 'p',
   className = "",
   delay = 100,
   duration = 0.6,
@@ -39,7 +42,7 @@ const SplitText = ({
   textAlign = "center",
   onLetterAnimationComplete,
 }: SplitTextProps) => {
-  const ref = useRef<HTMLParagraphElement>(null);
+  const ref = useRef<HTMLElement>(null);
   const animationCompletedRef = useRef(false);
   const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
 
@@ -153,7 +156,7 @@ const SplitText = ({
   ]);
 
   return (
-    <p
+    <Component
       ref={ref}
       className={`split-parent ${className}`}
       style={{
@@ -165,7 +168,7 @@ const SplitText = ({
       }}
     >
       {text}
-    </p>
+    </Component>
   );
 };
 

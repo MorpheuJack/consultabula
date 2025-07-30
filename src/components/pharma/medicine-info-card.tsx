@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { HeartPulse, XCircle, AlertTriangle, Pill, ShieldAlert } from 'lucide-react';
 import { Skeleton } from '../ui/skeleton';
+import SplitText from '../ui/split-text';
 
 type MedicineInfoCardProps = {
   info: MedicineInfo;
@@ -31,7 +32,17 @@ export default function MedicineInfoCard({ info }: MedicineInfoCardProps) {
   return (
     <Card className="shadow-lg bg-card border-none rounded-2xl">
       <CardHeader className="p-8">
-        <CardTitle className="text-4xl font-extrabold font-headline text-foreground tracking-tighter">{info.name}</CardTitle>
+        <SplitText
+            as={CardTitle}
+            text={info.name}
+            className="text-4xl font-extrabold font-headline text-foreground tracking-tighter"
+            splitType="words"
+            from={{ opacity: 0, y: 20 }}
+            to={{ opacity: 1, y: 0 }}
+            delay={30}
+            duration={0.5}
+            ease="power3.out"
+        />
         <CardDescription className="text-lg pt-1 text-muted-foreground">Aqui está o que encontramos sobre este medicamento.</CardDescription>
       </CardHeader>
       <CardContent className="p-8 pt-0">

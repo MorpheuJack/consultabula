@@ -9,6 +9,7 @@ import Header from '@/components/layout/header';
 import InputArea from '@/components/pharma/input-area';
 import MedicineInfoCard from '@/components/pharma/medicine-info-card';
 import { motion, AnimatePresence } from 'framer-motion';
+import SplitText from '@/components/ui/split-text';
 
 export default function AppPage() {
   const [medicineInfo, setMedicineInfo] = useState<MedicineInfo | null>(null);
@@ -49,9 +50,17 @@ export default function AppPage() {
             transition={{ duration: 0.5 }}
             className="w-full max-w-3xl mx-auto space-y-8 text-center"
         >
-            <h1 className="text-4xl lg:text-5xl font-extrabold font-headline text-foreground tracking-tighter">
-                Consulte a bula do seu medicamento
-            </h1>
+            <SplitText
+              as="h1"
+              text="Consulte a bula do seu medicamento"
+              className="text-4xl lg:text-5xl font-extrabold font-headline text-foreground tracking-tighter"
+              splitType="words"
+              from={{ opacity: 0, y: 20 }}
+              to={{ opacity: 1, y: 0 }}
+              delay={50}
+              duration={0.6}
+              ease="power3.out"
+            />
             <p className="text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
                 Digite o nome ou envie uma foto do medicamento para obter as informações da bula instantaneamente.
             </p>
