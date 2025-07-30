@@ -8,7 +8,7 @@ type ProductImageProps = {
 
 export default function ProductImage({ product }: ProductImageProps) {
   return (
-    <div className="flex justify-center items-center bg-card rounded-lg p-8">
+    <div className="flex justify-center items-center bg-white/10 rounded-lg p-8 backdrop-blur-sm">
       <Image
         src={product.image}
         alt={product.name}
