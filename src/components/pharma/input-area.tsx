@@ -151,6 +151,12 @@ export default function InputArea({ onTextSubmit, onImageSubmit, isLoading }: In
 
   const secondaryButtonClasses = "text-base sm:text-lg rounded-xl h-14 bg-secondary/80 text-secondary-foreground hover:bg-secondary/100 transition-all duration-300 ease-in-out shadow-sm hover:shadow-lg focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent";
 
+  function onTextFormSubmit(data: z.infer<typeof textFormSchema>) {
+    const formData = new FormData();
+    formData.append('medicineName', data.medicineName);
+    onTextSubmit(formData);
+  }
+
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
@@ -181,8 +187,7 @@ export default function InputArea({ onTextSubmit, onImageSubmit, isLoading }: In
               <TabsContent value="text" className="mt-0">
                 <Form {...form}>
                   <form
-                    onSubmit={form.handleSubmit(() => onTextSubmit(new FormData(document.getElementById('text-form') as HTMLFormElement)))}
-                    id="text-form"
+                    onSubmit={form.handleSubmit(onTextFormSubmit)}
                     className="space-y-6"
                   >
                     <FormField
