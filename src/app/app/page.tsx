@@ -69,56 +69,58 @@ export default function AppPage() {
         }}
     >
        <Header />
-       <main className="flex-grow container mx-auto px-4 py-8 md:py-12 flex flex-col items-center pt-32">
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="w-full max-w-3xl mx-auto space-y-8 text-center"
-        >
-            <SplitText
-              as="h1"
-              text="Consulte a bula do seu medicamento"
-              className="text-4xl lg:text-5xl font-extrabold font-headline text-white tracking-tighter"
-              splitType="words"
-              from={{ opacity: 0, y: 20 }}
-              to={{ opacity: 1, y: 0 }}
-              delay={50}
-              duration={0.6}
-              ease="power3.out"
-            />
-            <p className="text-lg lg:text-xl text-white/90 max-w-2xl mx-auto">
-                Digite o nome ou envie uma foto do medicamento para obter informações sobre dosagem, efeitos e muito mais.
-            </p>
-        </motion.div>
+       <main className="flex-grow container mx-auto px-4 py-8 md:py-12 flex flex-col items-center justify-center">
+        <div className="w-full max-w-3xl space-y-12">
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="w-full mx-auto space-y-8 text-center"
+            >
+                <SplitText
+                  as="h1"
+                  text="Consulte a bula do seu medicamento"
+                  className="text-4xl lg:text-5xl font-extrabold font-headline text-white tracking-tighter"
+                  splitType="words"
+                  from={{ opacity: 0, y: 20 }}
+                  to={{ opacity: 1, y: 0 }}
+                  delay={50}
+                  duration={0.6}
+                  ease="power3.out"
+                />
+                <p className="text-lg lg:text-xl text-white/90 max-w-2xl mx-auto">
+                    Digite o nome ou envie uma foto do medicamento para obter informações sobre dosagem, efeitos e muito mais.
+                </p>
+            </motion.div>
 
-        <div className="w-full max-w-3xl mx-auto space-y-8 mt-12">
-           <InputArea onTextSubmit={handleTextSubmit} onImageSubmit={handleImageSubmit} isLoading={isLoading} />
-           <div className="mt-8 min-h-[300px]">
-            <AnimatePresence>
-              {isLoading && (
-                <motion.div
-                  key="skeleton"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <MedicineInfoCard.Skeleton />
-                </motion.div>
-              )}
-              {medicineInfo && !isLoading && (
-                <motion.div
-                  key="card"
-                  initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ duration: 0.4, ease: 'easeOut' }}
-                >
-                  <MedicineInfoCard info={medicineInfo} />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+            <div className="w-full mx-auto">
+               <InputArea onTextSubmit={handleTextSubmit} onImageSubmit={handleImageSubmit} isLoading={isLoading} />
+               <div className="mt-8 min-h-[300px]">
+                <AnimatePresence>
+                  {isLoading && (
+                    <motion.div
+                      key="skeleton"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <MedicineInfoCard.Skeleton />
+                    </motion.div>
+                  )}
+                  {medicineInfo && !isLoading && (
+                    <motion.div
+                      key="card"
+                      initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      transition={{ duration: 0.4, ease: 'easeOut' }}
+                    >
+                      <MedicineInfoCard info={medicineInfo} />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </div>
         </div>
       </main>
     </div>
