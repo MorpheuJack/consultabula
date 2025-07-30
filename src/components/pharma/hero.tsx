@@ -1,47 +1,56 @@
 
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Search } from 'lucide-react';
 
 export default function Hero() {
   return (
-    <section className="relative w-full h-[calc(100svh-88px)] flex items-center bg-secondary overflow-hidden">
-        <div className="absolute inset-y-0 right-0 w-1/2">
-             <Image
-                src="/app.png"
-                alt="Profissional de saúde sorrindo"
-                fill
-                style={{objectFit: 'cover'}}
-                className="opacity-60"
-                data-ai-hint="pharmacist professional"
-                priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/70 to-transparent"></div>
-        </div>
-
-        <div className="container mx-auto px-4 z-10">
-            <div className="max-w-xl text-left">
-                <h1 className="text-5xl lg:text-7xl font-extrabold font-headline text-foreground leading-tight tracking-tighter mb-6">
-                    Bula de Remédio na Palma da Mão.
-                </h1>
-                <p className="mt-6 text-lg lg:text-xl text-muted-foreground max-w-xl">
-                    Consulte bulas de forma rápida e segura. Tire suas dúvidas sobre medicamentos por texto ou enviando uma foto da embalagem.
-                </p>
-                <div className="mt-10 flex gap-4">
-                    <Link href="/app">
-                        <Button
-                            size="lg"
-                            className="bg-accent hover:bg-accent/90 text-accent-foreground text-lg py-7 px-8 rounded-full shadow-lg hover:shadow-xl transition-shadow"
-                        >
-                            Começar Agora
+    <section 
+        className="relative w-full min-h-screen flex flex-col items-center justify-center text-center text-white p-4"
+        style={{
+            background: 'linear-gradient(135deg, #1D976C 0%, #93F9B9 100%)',
+            backgroundImage: `
+                linear-gradient(to right bottom, rgba(29, 151, 108, 0.9), rgba(147, 249, 185, 0.9)), 
+                url('/background-icons.svg')
+            `,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+        }}
+    >
+        <div className="container mx-auto px-4 z-10 flex flex-col items-center">
+            <h1 className="text-5xl lg:text-7xl font-extrabold font-headline leading-tight tracking-tighter mb-6 shadow-lg">
+                Precisa consultar a bula de um remédio?
+            </h1>
+            <p className="mt-4 text-lg lg:text-xl text-white/90 max-w-2xl mx-auto shadow-md">
+                A resposta mais rápida e confiável para suas dúvidas sobre medicamentos.
+                Digite o nome ou envie uma foto.
+            </p>
+            
+            <div className="mt-12 w-full max-w-2xl">
+                <div className="relative">
+                    <Search className="absolute left-6 top-1/2 -translate-y-1/2 h-6 w-6 text-muted-foreground" />
+                    <input
+                        type="text"
+                        placeholder="Digite o nome do medicamento aqui..."
+                        className="w-full h-16 pl-16 pr-40 rounded-full text-lg text-foreground bg-white/90 focus:bg-white focus:outline-none focus:ring-4 focus:ring-white/50 transition-all duration-300 shadow-2xl"
+                    />
+                     <Button
+                        size="lg"
+                        className="absolute right-2.5 top-1/2 -translate-y-1/2 bg-accent hover:bg-accent/90 text-accent-foreground text-lg py-7 px-8 rounded-full shadow-lg hover:shadow-xl transition-shadow"
+                        asChild
+                    >
+                       <Link href="/app">
+                            Consultar
                             <ArrowRight className="ml-2 h-5 w-5" />
-                        </Button>
-                    </Link>
+                       </Link>
+                    </Button>
                 </div>
             </div>
+             <p className="mt-6 text-sm text-white/70">
+                Ou <Link href="/app" className="underline hover:text-white">envie uma foto da embalagem</Link> para uma análise instantânea.
+            </p>
         </div>
     </section>
   );
