@@ -16,7 +16,7 @@ const InfoSection = ({ title, content, icon: Icon }: { title: string; content?: 
     <AccordionItem value={title} className="border-b-0">
       <AccordionTrigger className="text-lg hover:no-underline font-semibold py-5">
         <div className="flex items-center gap-3">
-          <Icon className="h-6 w-6 text-primary" />
+          <Icon className="h-6 w-6 text-accent" />
           <span>{title}</span>
         </div>
       </AccordionTrigger>

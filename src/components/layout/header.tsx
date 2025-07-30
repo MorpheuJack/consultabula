@@ -25,7 +25,7 @@ export default function Header() {
             <Button variant="ghost" asChild className="text-white hover:bg-white/10 hover:text-white">
                 <Link href="/shop">Loja</Link>
             </Button>
-            <Button asChild className="rounded-full shadow-lg bg-white text-primary hover:bg-white/90 transition-colors">
+            <Button asChild className="rounded-full shadow-lg bg-white text-accent hover:bg-white/90 transition-colors">
                 <Link href="/app">Consultar Bula</Link>
             </Button>
              <Button variant="ghost" size="icon" className="text-white hover:bg-white/10 relative">

@@ -148,8 +148,8 @@ export default function InputArea({ onTextSubmit, onImageSubmit, isLoading }: In
         <CardContent className="p-2">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             <TabsList className="grid w-full grid-cols-3 bg-secondary/80 p-1 h-auto sm:h-12">
-              <TabsTrigger value="text" className="rounded-lg text-sm sm:text-lg data-[state=active]:bg-card data-[state=active]:text-primary data-[state=active]:shadow-md flex-col sm:flex-row gap-1 sm:gap-2 py-2"><FileText className="h-5 w-5" /><span>Texto</span></TabsTrigger>
-              <TabsTrigger value="image" className="rounded-lg text-sm sm:text-lg data-[state=active]:bg-card data-[state=active]:text-primary data-[state=active]:shadow-md flex-col sm:flex-row gap-1 sm:gap-2 py-2"><ImageIcon className="h-5 w-5" /><span>Imagem</span></TabsTrigger>
+              <TabsTrigger value="text" className="rounded-lg text-sm sm:text-lg data-[state=active]:bg-card data-[state=active]:text-accent data-[state=active]:shadow-md flex-col sm:flex-row gap-1 sm:gap-2 py-2"><FileText className="h-5 w-5" /><span>Texto</span></TabsTrigger>
+              <TabsTrigger value="image" className="rounded-lg text-sm sm:text-lg data-[state=active]:bg-card data-[state=active]:text-accent data-[state=active]:shadow-md flex-col sm:flex-row gap-1 sm:gap-2 py-2"><ImageIcon className="h-5 w-5" /><span>Imagem</span></TabsTrigger>
               <TabsTrigger value="voice" disabled className="rounded-lg text-sm sm:text-lg flex-col sm:flex-row gap-1 sm:gap-2 py-2">
                   <TooltipProvider>
                       <Tooltip>
@@ -214,7 +214,7 @@ export default function InputArea({ onTextSubmit, onImageSubmit, isLoading }: In
                            </AlertDescription>
                          </Alert>
                        )}
-                       <Button type="button" size="lg" onClick={takePicture} className="w-full bg-primary hover:bg-primary/90 text-base sm:text-lg rounded-xl h-14">
+                       <Button type="button" size="lg" onClick={takePicture} className="w-full bg-accent hover:bg-accent/90 text-base sm:text-lg rounded-xl h-14">
                          <Camera className="mr-2 h-5 w-5" />
                          Tirar Foto
                        </Button>
