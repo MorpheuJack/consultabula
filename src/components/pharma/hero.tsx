@@ -10,7 +10,7 @@ export default function Hero() {
   return (
     <section className="w-full bg-card overflow-hidden">
       <div className="container mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center min-h-[calc(100vh-88px)] py-20 md:py-0">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center min-h-[calc(100svh-88px)] py-20 md:py-0">
           <div className="flex flex-col justify-center text-center md:text-left">
             <h1 className="text-5xl lg:text-7xl font-extrabold font-headline text-foreground leading-tight tracking-tighter">
               Sua Saúde, Simplificada.
