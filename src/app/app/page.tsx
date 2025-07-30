@@ -56,10 +56,6 @@ export default function AppPage() {
           </div>
         </div>
       </main>
-      <footer className="w-full py-6">
-        <div className="container mx-auto px-4 max-w-3xl">
-        </div>
-      </footer>
     </div>
   );
 }
