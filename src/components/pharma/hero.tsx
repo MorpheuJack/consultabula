@@ -49,9 +49,6 @@ export default function Hero() {
                 duration={0.8}
                 ease="power3.out"
             />
-            <p className="mt-6 text-base md:text-lg lg:text-xl text-white/90 max-w-2xl mx-auto" style={{ wordBreak: 'keep-all' }}>
-                Diga adeus à confusão das bulas. Consulte informações de forma rápida e segura, seja por texto ou imagem.
-            </p>
             
             <div className="mt-12 w-full max-w-2xl">
                 <form onSubmit={handleSearchSubmit} className="relative flex flex-col sm:flex-row gap-4">
