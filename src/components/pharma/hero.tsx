@@ -2,17 +2,14 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowDown } from 'lucide-react';
 
-type HeroProps = {
-    onGetStartedClick: () => void;
-};
-
-export default function Hero({ onGetStartedClick }: HeroProps) {
+export default function Hero() {
   return (
     <section className="w-full bg-card">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 min-h-[calc(100vh-80px)] md:min-h-[600px] max-h-[800px]">
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 min-h-[calc(100vh-160px)] md:min-h-[600px] max-h-[800px]">
         <div className="flex flex-col justify-center text-center md:text-left p-8">
           <h1 className="text-4xl lg:text-6xl font-bold font-headline text-primary leading-tight">
             Sua Saúde, Simplificada.
@@ -21,14 +18,15 @@ export default function Hero({ onGetStartedClick }: HeroProps) {
             Obtenha informações claras e confiáveis sobre medicamentos. Tire suas dúvidas por texto ou imagem de forma rápida e segura.
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-            <Button
-              size="lg"
-              className="bg-accent hover:bg-accent/90 text-accent-foreground"
-              onClick={onGetStartedClick}
-            >
-              Começar Agora
-              <ArrowDown className="ml-2 h-5 w-5" />
-            </Button>
+            <Link href="/app">
+                <Button
+                  size="lg"
+                  className="bg-accent hover:bg-accent/90 text-accent-foreground"
+                >
+                  Começar Agora
+                  <ArrowDown className="ml-2 h-5 w-5" />
+                </Button>
+            </Link>
           </div>
         </div>
         <div className="relative hidden md:flex items-center justify-center overflow-hidden">
