@@ -25,11 +25,10 @@ export default function Hero() {
                 textClassName="text-4xl md:text-5xl lg:text-7xl font-extrabold font-headline leading-tight tracking-tighter text-white"
                 containerClassName='mb-6'
             >
-                Precisa consultar a bula de um remédio?
+                A clareza que você precisa sobre medicamentos, instantaneamente.
             </ScrollFloat>
             <p className="mt-4 text-base md:text-lg lg:text-xl text-white/90 max-w-2xl mx-auto">
-                A resposta mais rápida e confiável para suas dúvidas sobre medicamentos.
-                Digite o nome ou envie uma foto.
+                Diga adeus à confusão das bulas. Consulte informações de forma rápida e segura, seja por texto ou imagem.
             </p>
             
             <div className="mt-12 w-full max-w-2xl">
@@ -38,7 +37,7 @@ export default function Hero() {
                         <Search className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                         <input
                             type="text"
-                            placeholder="Digite o nome do medicamento..."
+                            placeholder="Digite o nome de um medicamento..."
                             className="w-full h-14 sm:h-16 pl-12 sm:pl-16 pr-4 rounded-full text-base sm:text-lg text-foreground bg-white/90 focus:bg-white focus:outline-none focus:ring-4 focus:ring-white/50 transition-all duration-300 shadow-2xl"
                         />
                     </div>
@@ -55,7 +54,7 @@ export default function Hero() {
                 </div>
             </div>
              <p className="mt-6 text-sm text-white/70">
-                Ou <Link href="/app" className="underline hover:text-white">envie uma foto da embalagem</Link> para uma análise instantânea.
+                Ou <Link href="/app" className="underline hover:text-white">envie uma foto da embalagem</Link> para obter informações.
             </p>
         </div>
     </section>

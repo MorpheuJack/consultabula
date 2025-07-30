@@ -4,7 +4,7 @@ import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
   title: 'Consulta Bula',
-  description: 'Encontre informações de bulas de forma fácil e rápida.',
+  description: 'Consulte informações de medicamentos por texto ou imagem. Rápido, seguro e confiável.',
 };
 
 export default function RootLayout({

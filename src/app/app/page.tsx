@@ -62,7 +62,7 @@ export default function AppPage() {
               ease="power3.out"
             />
             <p className="text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
-                Digite o nome ou envie uma foto do medicamento para obter as informações da bula instantaneamente.
+                Digite o nome ou envie uma foto do medicamento para obter informações sobre dosagem, efeitos e muito mais.
             </p>
         </motion.div>
 

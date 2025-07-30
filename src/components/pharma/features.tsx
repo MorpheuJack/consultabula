@@ -8,23 +8,23 @@ import ScrollFloat from '../ui/scroll-float';
 const featureData = [
     {
         icon: HeartPulse,
-        title: 'Informações por Texto',
-        description: 'Basta digitar o nome do medicamento para receber informações detalhadas.',
+        title: 'Consulta por Texto',
+        description: 'Digite o nome do medicamento e tenha acesso instantâneo a informações vitais.',
     },
     {
         icon: Search,
-        title: 'Reconhecimento por Imagem',
-        description: 'Tire uma foto da caixa do remédio e nossa IA irá identificá-lo para você.',
+        title: 'Análise por Imagem',
+        description: 'Envie uma foto da embalagem e nossa IA identifica o medicamento para você.',
     },
     {
         icon: BarChart,
-        title: 'Dados Confiáveis',
-        description: 'Utilizamos fontes de dados seguras para fornecer informações precisas.',
+        title: 'Informação Confiável',
+        description: 'Acesse dados seguros e atualizados para tomar decisões com mais confiança.',
     },
     {
         icon: SlidersHorizontal,
         title: 'Interface Intuitiva',
-        description: 'Um design limpo e moderno para uma experiência de usuário agradável.',
+        description: 'Navegue em um ambiente claro e objetivo, focado no que realmente importa.',
     }
 ];
 
@@ -37,10 +37,10 @@ export default function Features() {
                 as="h2"
                 textClassName="text-3xl md:text-4xl lg:text-5xl font-extrabold font-headline text-accent tracking-tighter"
             >
-                Tudo que você precisa em um só lugar
+                Recursos pensados para sua saúde
             </ScrollFloat>
             <p className="mt-4 text-base md:text-lg text-muted-foreground max-w-3xl mx-auto">
-                Nossa plataforma foi desenhada para ser sua assistente de saúde pessoal, fornecendo informações claras e rápidas sobre medicamentos.
+                Desenvolvemos uma ferramenta completa para que você tenha acesso rápido e seguro a informações sobre medicamentos, na palma da sua mão.
             </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
