@@ -1,7 +1,6 @@
 
 import { HeartPulse, Search, SlidersHorizontal, BarChart } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
-import SplitText from '../ui/split-text';
 import ScrollFloat from '../ui/scroll-float';
 
 const featureData = [
@@ -34,7 +33,7 @@ export default function Features() {
         <div className="text-center mb-16">
             <ScrollFloat
                 as="h2"
-                textClassName="text-4xl lg:text-5xl font-extrabold font-headline text-foreground tracking-tighter"
+                textClassName="text-4xl lg:text-5xl font-extrabold font-headline text-accent tracking-tighter"
             >
                 Tudo que você precisa em um só lugar
             </ScrollFloat>

@@ -35,7 +35,7 @@ export default function MedicineInfoCard({ info }: MedicineInfoCardProps) {
         <SplitText
             as={CardTitle}
             text={info.name}
-            className="text-4xl font-extrabold font-headline text-foreground tracking-tighter"
+            className="text-4xl font-extrabold font-headline text-accent tracking-tighter"
             splitType="words"
             from={{ opacity: 0, y: 20 }}
             to={{ opacity: 1, y: 0 }}
