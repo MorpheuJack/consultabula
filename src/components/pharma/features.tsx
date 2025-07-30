@@ -2,6 +2,7 @@
 import { HeartPulse, Search, SlidersHorizontal, BarChart } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import SplitText from '../ui/split-text';
+import ScrollFloat from '../ui/scroll-float';
 
 const featureData = [
     {
@@ -31,17 +32,12 @@ export default function Features() {
     <section id="features" className="py-24 sm:py-32 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-            <SplitText
+            <ScrollFloat
                 as="h2"
-                text="Tudo que você precisa em um só lugar"
-                className="text-4xl lg:text-5xl font-extrabold font-headline text-foreground tracking-tighter"
-                splitType="words"
-                from={{ opacity: 0, y: 20 }}
-                to={{ opacity: 1, y: 0 }}
-                delay={50}
-                duration={0.6}
-                ease="power3.out"
-            />
+                textClassName="text-4xl lg:text-5xl font-extrabold font-headline text-foreground tracking-tighter"
+            >
+                Tudo que você precisa em um só lugar
+            </ScrollFloat>
             <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
                 Nossa plataforma foi desenhada para ser sua assistente de saúde pessoal, fornecendo informações claras e rápidas sobre medicamentos.
             </p>
