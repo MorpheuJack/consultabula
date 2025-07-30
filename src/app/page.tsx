@@ -11,8 +11,8 @@ export default function Home() {
       <Header />
       <main className="flex-grow">
         <Hero />
-        <ScrollVelocity texts={['Consulta Bula', 'PharmaInfo AI']} velocity={20} />
         <Features />
+        <ScrollVelocity texts={['Consulta Bula', 'PharmaInfo AI']} velocity={20} />
       </main>
     </div>
   );
