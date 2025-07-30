@@ -36,7 +36,7 @@ const ProvideMedicineInformationOutputSchema = z.object({
 export type ProvideMedicineInformationOutput = z.infer<typeof ProvideMedicineInformationOutputSchema>;
 
 const groq = new Groq({
-    apiKey: process.env.GROQ_API_KEY || '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',
+    apiKey: process.env.GROQ_API_KEY,
 });
 
 export async function provideMedicineInformation(
@@ -46,9 +46,10 @@ export async function provideMedicineInformation(
     messages: [
       {
         role: 'system',
-        content: `You are a helpful AI assistant providing information about medicines. Provide a summary of the medicine's uses, contraindications, and other relevant details based on the provided medicine name.
-        Provide the information in a structured JSON format under a "medicineInformation" key.
-        Make sure to include uses and contraindications.`
+        content: `You are a helpful AI assistant providing information about medicines. Your response MUST be a valid JSON object.
+        Provide a summary of the medicine's uses, contraindications, and other relevant details based on the provided medicine name.
+        The JSON object must have a single key "medicineInformation" which contains an object with the following keys: "uses", "contraindications", and optionally "sideEffects", "dosage", and "warnings".
+        Do not include any text outside of the JSON object.`
       },
       {
         role: 'user',
@@ -74,6 +75,7 @@ export async function provideMedicineInformation(
     return validatedOutput;
   } catch (error) {
     console.error("Error parsing or validating AI response:", error);
+    console.error("Invalid response content:", responseContent);
     throw new Error("The AI returned an invalid response format.");
   }
 }
