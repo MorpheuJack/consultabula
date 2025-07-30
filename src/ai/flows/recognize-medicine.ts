@@ -74,7 +74,6 @@ export async function recognizeMedicineFromPhoto(input: RecognizeMedicineFromPho
     temperature: 0,
     max_tokens: 4096,
     top_p: 1,
-    response_format: { type: 'json_object' },
   });
 
   const responseContent = completion.choices[0]?.message?.content;
