@@ -4,6 +4,7 @@ import ProductDetails from '@/components/pharma/product-details';
 import ProductImage from '@/components/pharma/product-image';
 import { products } from '@/lib/products';
 import { notFound } from 'next/navigation';
+import Footer from '@/components/layout/footer';
 
 type ProductPageProps = {
   params: {
@@ -39,6 +40,7 @@ export default function ProductPage({ params }: ProductPageProps) {
           <ProductDetails product={product} />
         </div>
       </main>
+      <Footer />
     </div>
   );
 }

@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input';
 import { products } from '@/lib/products';
 import { type Product } from '@/lib/types';
 import { ChevronDown, Search } from 'lucide-react';
+import Footer from '@/components/layout/footer';
 
 export default function ShopPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -72,6 +73,7 @@ export default function ShopPage() {
           ))}
         </div>
       </main>
+      <Footer />
     </div>
   );
 }
