@@ -8,6 +8,7 @@ import { getMedicineInfoFromImage, getMedicineInfoFromText } from '@/app/actions
 import Header from '@/components/layout/header';
 import InputArea from '@/components/pharma/input-area';
 import MedicineInfoCard from '@/components/pharma/medicine-info-card';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function AppPage() {
   const [medicineInfo, setMedicineInfo] = useState<MedicineInfo | null>(null);
@@ -39,20 +40,49 @@ export default function AppPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-background text-foreground font-body">
-      <Header />
-      <main className="flex-grow container mx-auto px-4 py-8 md:py-12">
-        <div className="max-w-3xl mx-auto space-y-8">
-          <section className="text-center">
-            <h2 className="text-3xl md:text-4xl font-bold font-headline text-primary mb-2">Como podemos ajudar?</h2>
-            <p className="text-lg text-muted-foreground">
-              Escolha uma das opções abaixo para obter informações sobre um medicamento.
+    <div className="flex flex-col min-h-screen bg-background text-foreground font-body antialiased">
+       <Header />
+       <main className="flex-grow container mx-auto px-4 py-8 md:py-12 flex flex-col items-center">
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="w-full max-w-3xl mx-auto space-y-8 text-center"
+        >
+            <h1 className="text-4xl lg:text-5xl font-extrabold font-headline text-primary leading-tight tracking-tighter">
+                Como podemos ajudar?
+            </h1>
+            <p className="text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
+                Escolha uma das opções abaixo para obter informações sobre um medicamento.
             </p>
-          </section>
-          <InputArea onTextSubmit={handleTextSubmit} onImageSubmit={handleImageSubmit} isLoading={isLoading} />
-          <div className="mt-8 min-h-[300px]">
-            {isLoading && <MedicineInfoCard.Skeleton />}
-            {medicineInfo && !isLoading && <MedicineInfoCard info={medicineInfo} />}
+        </motion.div>
+
+        <div className="w-full max-w-3xl mx-auto space-y-8 mt-12">
+           <InputArea onTextSubmit={handleTextSubmit} onImageSubmit={handleImageSubmit} isLoading={isLoading} />
+           <div className="mt-8 min-h-[300px]">
+            <AnimatePresence>
+              {isLoading && (
+                <motion.div
+                  key="skeleton"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <MedicineInfoCard.Skeleton />
+                </motion.div>
+              )}
+              {medicineInfo && !isLoading && (
+                <motion.div
+                  key="card"
+                  initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ duration: 0.4, ease: 'easeOut' }}
+                >
+                  <MedicineInfoCard info={medicineInfo} />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </main>

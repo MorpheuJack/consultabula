@@ -1,5 +1,4 @@
 
-import Image from 'next/image';
 import { HeartPulse, Search, SlidersHorizontal, BarChart } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 
@@ -28,7 +27,7 @@ const featureData = [
 
 export default function Features() {
   return (
-    <section className="py-24 sm:py-32 bg-background">
+    <section id="features" className="py-24 sm:py-32 bg-secondary">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-extrabold font-headline text-foreground tracking-tighter">
