@@ -20,12 +20,21 @@ export async function getMedicineInfoFromText(formData: FormData): Promise<{ dat
 
     try {
         const result = await provideMedicineInformation({ medicineName: validatedFields.data.medicineName });
-        if (!result?.medicineInformation) throw new Error('Nenhuma informação encontrada para este medicamento.');
+        
+        if (!result?.medicamento?.encontrado || !result.medicamento.informacoes) {
+            return { error: `Nenhuma informação encontrada para "${result?.medicamento?.nomePesquisado || validatedFields.data.medicineName}".` };
+        }
+        
+        const { nomePesquisado, informacoes } = result.medicamento;
         
         return {
             data: {
-                name: validatedFields.data.medicineName,
-                ...result.medicineInformation,
+                name: nomePesquisado,
+                uses: `${informacoes.usos.primarios}\n${informacoes.usos.secundarios}`,
+                contraindications: informacoes.contraindicacoes,
+                sideEffects: `Comuns: ${informacoes.efeitosColaterais.comuns}\nRaros mas Graves: ${informacoes.efeitosColaterais.rarosMasGraves}`,
+                dosage: informacoes.dosagem,
+                warnings: informacoes.avisos,
             }
         };
     } catch (e) {
@@ -49,7 +58,9 @@ export async function getMedicineInfoFromImage(formData: FormData): Promise<{ da
 
     try {
         const result = await recognizeMedicineFromPhoto({ photoDataUri: validatedFields.data.photoDataUri });
-        if (!result?.medicineInfo) throw new Error('Não foi possível reconhecer o medicamento na imagem.');
+        if (!result?.medicineInfo) {
+            return { error: 'Não foi possível reconhecer o medicamento na imagem.' };
+        }
         
         return { data: result.medicineInfo };
     } catch (e) {
