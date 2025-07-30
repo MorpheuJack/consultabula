@@ -70,7 +70,7 @@ export default function AppPage() {
     >
        <Header />
        <main className="flex-grow container mx-auto px-4 py-8 md:py-12 flex flex-col items-center justify-center">
-        <div className="w-full max-w-3xl space-y-12">
+        <div className="w-full max-w-3xl space-y-12 mt-24">
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
