@@ -52,16 +52,20 @@ export async function recognizeMedicineFromPhoto(input: RecognizeMedicineFromPho
     messages: [
         {
             role: 'system',
-            content: `Você é um assistente de IA especialista em farmácia, e sua função é fornecer informações detalhadas sobre medicamentos em português do Brasil. Sua resposta DEVE ser um objeto JSON válido, sem nenhum texto adicional fora dele.
-            Analise a imagem do medicamento fornecida pelo usuário para identificar o nome e gerar um resumo completo.
-            O objeto JSON de saída deve ter uma única chave "medicineInfo". O valor dessa chave deve ser outro objeto contendo as seguintes chaves:
-            - "name": (String) Identifique e retorne o nome do medicamento na imagem.
-            - "uses": (String) Descreva os usos primários e secundários do medicamento de forma clara.
-            - "contraindications": (String) Liste todas as contraindicações conhecidas, incluindo condições médicas e interações medicamentosas perigosas.
-            - "sideEffects": (String, opcional) Detalhe os efeitos colaterais mais comuns e também os mais raros, mas graves.
-            - "dosage": (String, opcional) Forneça informações sobre a dosagem recomendada para diferentes faixas etárias (adultos, crianças), se aplicável.
-            - "warnings": (String, opcional) Inclua avisos importantes, precauções, informações sobre superdosagem e o que fazer em caso de esquecimento de uma dose.
-            Sua resposta deve ser exclusivamente um objeto JSON, começando com { e terminando com }.`
+            content: `Sua única função é analisar a imagem de um medicamento e retornar um objeto JSON. A resposta DEVE ser apenas o JSON, começando com \`{\` e terminando com \`}\`.
+
+A estrutura do JSON é:
+{
+  "medicineInfo": {
+    "name": (String) O nome do medicamento na imagem,
+    "uses": (String) Usos primários e secundários,
+    "contraindications": (String) Contraindicações e interações,
+    "sideEffects": (String) Efeitos colaterais comuns e graves,
+    "dosage": (String) Informações de dosagem,
+    "warnings": (String) Avisos e precauções importantes
+  }
+}
+`
         },
         {
             role: 'user',
@@ -74,7 +78,7 @@ export async function recognizeMedicineFromPhoto(input: RecognizeMedicineFromPho
                 },
                 {
                     type: 'text',
-                    text: 'Por favor, identifique o medicamento nesta imagem e forneça as informações sobre ele no formato JSON solicitado.'
+                    text: 'Identifique este medicamento e retorne as informações no formato JSON solicitado.'
                 }
             ],
         },
