@@ -70,7 +70,7 @@ export default function AppPage() {
     >
        <Header />
        <main className="flex-grow container mx-auto px-4 flex flex-col items-center justify-center">
-        <div className="w-full max-w-6xl mt-24">
+        <div className="w-full max-w-6xl mt-48">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <motion.div
                     initial={{ opacity: 0, x: -30 }}
