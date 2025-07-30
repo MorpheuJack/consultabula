@@ -55,7 +55,19 @@ export default function AppPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-background text-foreground font-body antialiased">
+    <div 
+        className="flex flex-col min-h-screen text-white font-body antialiased"
+        style={{
+            background: 'linear-gradient(135deg, #1D976C 0%, #93F9B9 100%)',
+            backgroundImage: `
+                linear-gradient(to right bottom, rgba(29, 151, 108, 0.9), rgba(147, 249, 185, 0.9)), 
+                url('/background-icons.svg')
+            `,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundAttachment: 'fixed',
+        }}
+    >
        <Header />
        <main className="flex-grow container mx-auto px-4 py-8 md:py-12 flex flex-col items-center pt-32">
         <motion.div
@@ -67,7 +79,7 @@ export default function AppPage() {
             <SplitText
               as="h1"
               text="Consulte a bula do seu medicamento"
-              className="text-4xl lg:text-5xl font-extrabold font-headline text-accent tracking-tighter"
+              className="text-4xl lg:text-5xl font-extrabold font-headline text-white tracking-tighter"
               splitType="words"
               from={{ opacity: 0, y: 20 }}
               to={{ opacity: 1, y: 0 }}
@@ -75,7 +87,7 @@ export default function AppPage() {
               duration={0.6}
               ease="power3.out"
             />
-            <p className="text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg lg:text-xl text-white/90 max-w-2xl mx-auto">
                 Digite o nome ou envie uma foto do medicamento para obter informações sobre dosagem, efeitos e muito mais.
             </p>
         </motion.div>
