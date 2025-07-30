@@ -10,8 +10,10 @@ import Header from '@/components/layout/header';
 import InputArea from '@/components/pharma/input-area';
 import MedicineInfoCard from '@/components/pharma/medicine-info-card';
 import { motion, AnimatePresence } from 'framer-motion';
-import SplitText from '@/components/ui/split-text';
 import Footer from '@/components/layout/footer';
+import dynamic from 'next/dynamic';
+
+const SplitText = dynamic(() => import('@/components/ui/split-text-client'), { ssr: false });
 
 export default function AppPage() {
   const [medicineInfo, setMedicineInfo] = useState<MedicineInfo | null>(null);

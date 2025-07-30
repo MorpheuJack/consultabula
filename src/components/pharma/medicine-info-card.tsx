@@ -4,7 +4,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { HeartPulse, XCircle, AlertTriangle, Pill, ShieldAlert } from 'lucide-react';
 import { Skeleton } from '../ui/skeleton';
-import SplitText from '../ui/split-text';
+import dynamic from 'next/dynamic';
+
+const SplitText = dynamic(() => import('../ui/split-text-client'), { ssr: false });
 
 type MedicineInfoCardProps = {
   info: MedicineInfo;

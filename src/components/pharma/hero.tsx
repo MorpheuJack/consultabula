@@ -6,7 +6,9 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Search } from 'lucide-react';
 import ScrollFloat from '../ui/scroll-float';
-import SplitText from '../ui/split-text';
+import dynamic from 'next/dynamic';
+
+const SplitText = dynamic(() => import('../ui/split-text-client'), { ssr: false });
 
 export default function Hero() {
   const router = useRouter();

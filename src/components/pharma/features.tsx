@@ -4,7 +4,9 @@
 import { HeartPulse, Search, SlidersHorizontal, BarChart } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import ScrollFloat from '../ui/scroll-float';
-import SplitText from '../ui/split-text';
+import dynamic from 'next/dynamic';
+
+const SplitText = dynamic(() => import('../ui/split-text-client'), { ssr: false });
 
 const featureData = [
     {
