@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { Suspense, useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
 import { type MedicineInfo } from '@/lib/types';
@@ -15,7 +15,7 @@ import dynamic from 'next/dynamic';
 
 const SplitText = dynamic(() => import('@/components/ui/split-text-client'), { ssr: false });
 
-export default function AppPage() {
+function PageContent() {
   const [medicineInfo, setMedicineInfo] = useState<MedicineInfo | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
@@ -29,6 +29,7 @@ export default function AppPage() {
       formData.append('medicineName', medicineName);
       handleTextSubmit(formData);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
   useEffect(() => {
@@ -127,5 +128,13 @@ export default function AppPage() {
       </main>
       <Footer />
     </div>
+  );
+}
+
+export default function AppPage() {
+  return (
+    <Suspense fallback={<div>Carregando...</div>}>
+      <PageContent />
+    </Suspense>
   );
 }
