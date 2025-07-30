@@ -2,12 +2,26 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Search } from 'lucide-react';
 import ScrollFloat from '../ui/scroll-float';
 import SplitText from '../ui/split-text';
 
 export default function Hero() {
+  const router = useRouter();
+
+  const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const medicineName = formData.get('medicineName') as string;
+    if (medicineName) {
+      router.push(`/app?medicineName=${encodeURIComponent(medicineName)}`);
+    } else {
+      router.push('/app');
+    }
+  };
+
   return (
     <section 
         className="relative w-full min-h-screen flex flex-col items-center justify-center text-center p-4"
@@ -33,31 +47,30 @@ export default function Hero() {
                 duration={0.8}
                 ease="power3.out"
             />
-            <p className="mt-6 text-base md:text-lg lg:text-xl text-white/90 max-w-2xl mx-auto">
+            <p className="mt-6 text-base md:text-lg lg:text-xl text-white/90 max-w-2xl mx-auto" style={{ wordBreak: 'keep-all' }}>
                 Diga adeus à confusão das bulas. Consulte informações de forma rápida e segura, seja por texto ou imagem.
             </p>
             
             <div className="mt-12 w-full max-w-2xl">
-                <div className="relative flex flex-col sm:flex-row gap-4">
+                <form onSubmit={handleSearchSubmit} className="relative flex flex-col sm:flex-row gap-4">
                     <div className="relative flex-grow">
                         <Search className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                         <input
                             type="text"
+                            name="medicineName"
                             placeholder="Digite o nome de um medicamento..."
                             className="w-full h-14 sm:h-16 pl-12 sm:pl-16 pr-4 rounded-full text-base sm:text-lg text-foreground bg-white/90 focus:bg-white focus:outline-none focus:ring-4 focus:ring-white/50 transition-all duration-300 shadow-2xl"
                         />
                     </div>
                      <Button
+                        type="submit"
                         size="lg"
                         className="w-full sm:w-auto bg-accent hover:bg-accent/90 text-accent-foreground text-base sm:text-lg py-7 px-6 sm:px-8 rounded-full shadow-lg hover:shadow-xl transition-shadow shrink-0"
-                        asChild
                     >
-                       <Link href="/app">
-                            Consultar
-                            <ArrowRight className="ml-2 h-5 w-5 hidden sm:inline" />
-                       </Link>
+                        Consultar
+                        <ArrowRight className="ml-2 h-5 w-5 hidden sm:inline" />
                     </Button>
-                </div>
+                </form>
             </div>
              <p className="mt-6 text-sm text-white/70">
                 Ou <Link href="/app" className="underline hover:text-white">envie uma foto da embalagem</Link> para obter informações.

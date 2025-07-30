@@ -1,7 +1,8 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
 import { type MedicineInfo } from '@/lib/types';
 import { getMedicineInfoFromImage, getMedicineInfoFromText } from '@/app/actions';
@@ -15,6 +16,19 @@ export default function AppPage() {
   const [medicineInfo, setMedicineInfo] = useState<MedicineInfo | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const medicineName = searchParams.get('medicineName');
+    if (medicineName) {
+      const formData = new FormData();
+      formData.append('medicineName', medicineName);
+      handleTextSubmit(formData);
+
+      // Optionally, clear the query param from URL without reloading
+      // window.history.replaceState(null, '', '/app');
+    }
+  }, [searchParams]);
 
   const handleTextSubmit = async (formData: FormData) => {
     setIsLoading(true);
