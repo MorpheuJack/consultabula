@@ -23,7 +23,7 @@ export default function Hero() {
         <div className="container mx-auto px-4 z-10 flex flex-col items-center">
             <SplitText
               text="Precisa consultar a bula de um remédio?"
-              className="text-5xl lg:text-7xl font-extrabold font-headline leading-tight tracking-tighter mb-6 shadow-lg"
+              className="text-5xl lg:text-7xl font-extrabold font-headline leading-tight tracking-tighter mb-6"
               splitType="chars"
               from={{ opacity: 0, y: 40 }}
               to={{ opacity: 1, y: 0 }}
@@ -31,7 +31,7 @@ export default function Hero() {
               duration={0.6}
               ease="power3.out"
             />
-            <p className="mt-4 text-lg lg:text-xl text-white/90 max-w-2xl mx-auto shadow-md">
+            <p className="mt-4 text-lg lg:text-xl text-white/90 max-w-2xl mx-auto">
                 A resposta mais rápida e confiável para suas dúvidas sobre medicamentos.
                 Digite o nome ou envie uma foto.
             </p>
