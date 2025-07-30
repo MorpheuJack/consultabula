@@ -11,7 +11,7 @@ export default function Hero() {
     <section className="relative w-full h-[calc(100svh-88px)] flex items-center bg-secondary overflow-hidden">
         <div className="absolute inset-y-0 right-0 w-1/2">
              <Image
-                src="/consulta.png"
+                src="/app.png"
                 alt="Profissional de saúde sorrindo"
                 fill
                 style={{objectFit: 'cover'}}
