@@ -1,6 +1,6 @@
 
 import Link from 'next/link';
-import { Pill } from 'lucide-react';
+import { Pill, ShoppingCart } from 'lucide-react';
 import { Button } from '../ui/button';
 
 export default function Header() {
@@ -19,8 +19,18 @@ export default function Header() {
             <Button variant="ghost" asChild className="text-white hover:bg-white/10 hover:text-white">
                 <Link href="/#features">Funcionalidades</Link>
             </Button>
+            <Button variant="ghost" asChild className="text-white hover:bg-white/10 hover:text-white">
+                <Link href="/shop">Loja</Link>
+            </Button>
             <Button asChild className="rounded-full shadow-lg bg-white text-primary hover:bg-white/90 transition-colors">
                 <Link href="/app">Consultar Bula</Link>
+            </Button>
+             <Button variant="ghost" size="icon" className="text-white hover:bg-white/10 relative">
+                <ShoppingCart className="h-6 w-6" />
+                <span className="sr-only">Carrinho de compras</span>
+                <span className="absolute -top-1 -right-1 bg-destructive text-destructive-foreground text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
+                    0
+                </span>
             </Button>
         </div>
       </div>

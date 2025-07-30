@@ -6,3 +6,12 @@ export type MedicineInfo = {
   dosage?: string | null;
   warnings?: string | null;
 };
+
+export type Product = {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  image: string;
+  category: string;
+};
