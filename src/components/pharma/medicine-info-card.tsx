@@ -12,13 +12,13 @@ const InfoSection = ({ title, content, icon: Icon }: { title: string; content?: 
   if (!content) return null;
   return (
     <AccordionItem value={title}>
-      <AccordionTrigger className="text-lg hover:no-underline">
+      <AccordionTrigger className="text-lg hover:no-underline font-semibold">
         <div className="flex items-center gap-3">
-          <Icon className="h-5 w-5 text-primary" />
+          <Icon className="h-6 w-6 text-primary" />
           <span>{title}</span>
         </div>
       </AccordionTrigger>
-      <AccordionContent className="text-base prose prose-sm max-w-none text-foreground/80">
+      <AccordionContent className="text-base prose prose-sm max-w-none text-muted-foreground pt-2">
         {content.split('\n').map((line, index) => (
           <p key={index}>{line}</p>
         ))}
@@ -29,12 +29,12 @@ const InfoSection = ({ title, content, icon: Icon }: { title: string; content?: 
 
 export default function MedicineInfoCard({ info }: MedicineInfoCardProps) {
   return (
-    <Card className="shadow-lg animate-in fade-in-50 duration-500">
-      <CardHeader>
-        <CardTitle className="text-3xl font-headline text-primary">{info.name}</CardTitle>
-        <CardDescription>Aqui está o que encontramos sobre este medicamento.</CardDescription>
+    <Card className="shadow-2xl bg-card border-none animate-in fade-in-50 duration-500 rounded-2xl">
+      <CardHeader className="p-8">
+        <CardTitle className="text-4xl font-extrabold font-headline text-foreground tracking-tighter">{info.name}</CardTitle>
+        <CardDescription className="text-lg pt-1">Aqui está o que encontramos sobre este medicamento.</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="p-8 pt-0">
         <Accordion type="multiple" className="w-full" defaultValue={['Usos', 'Contraindicações']}>
           <InfoSection title="Usos" content={info.uses} icon={HeartPulse} />
           <InfoSection title="Contraindicações" content={info.contraindications} icon={XCircle} />
@@ -49,23 +49,23 @@ export default function MedicineInfoCard({ info }: MedicineInfoCardProps) {
 
 MedicineInfoCard.Skeleton = function MedicineInfoCardSkeleton() {
     return (
-        <Card className="shadow-lg">
-            <CardHeader>
-                <Skeleton className="h-8 w-1/2" />
-                <Skeleton className="h-4 w-3/4 mt-2" />
+        <Card className="shadow-2xl border-none rounded-2xl">
+            <CardHeader className="p-8">
+                <Skeleton className="h-10 w-3/5 rounded-md" />
+                <Skeleton className="h-6 w-4/5 mt-3 rounded-md" />
             </CardHeader>
-            <CardContent className="space-y-4">
-                <div className="space-y-2 border-b pb-2">
-                    <Skeleton className="h-6 w-1/4" />
-                    <Skeleton className="h-4 w-full" />
-                    <Skeleton className="h-4 w-5/6" />
+            <CardContent className="p-8 pt-0 space-y-6">
+                <div className="space-y-3 border-b pb-4">
+                    <Skeleton className="h-7 w-1/4 rounded-md" />
+                    <Skeleton className="h-5 w-full rounded-md" />
+                    <Skeleton className="h-5 w-5/6 rounded-md" />
                 </div>
-                 <div className="space-y-2 border-b pb-2">
-                    <Skeleton className="h-6 w-1/3" />
-                    <Skeleton className="h-4 w-full" />
+                 <div className="space-y-3 border-b pb-4">
+                    <Skeleton className="h-7 w-1/3 rounded-md" />
+                    <Skeleton className="h-5 w-full rounded-md" />
                 </div>
-                <div className="space-y-2">
-                    <Skeleton className="h-6 w-1/4" />
+                <div className="space-y-3">
+                    <Skeleton className="h-7 w-1/4 rounded-md" />
                 </div>
             </CardContent>
         </Card>

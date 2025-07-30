@@ -1,64 +1,57 @@
 
 import Image from 'next/image';
 import { HeartPulse, Search, SlidersHorizontal, BarChart } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 
 const featureData = [
     {
         icon: HeartPulse,
-        title: 'Demanda gigantesca para os médicos',
-        description: 'Diariamente surgem centenas de novas oportunidades de plantões.',
+        title: 'Informações por Texto',
+        description: 'Basta digitar o nome do medicamento para receber informações detalhadas.',
     },
     {
         icon: Search,
-        title: 'Fácil Conexão entre o contratante e contratado',
-        description: 'Em poucos cliques você fecha seu primeiro plantão.',
+        title: 'Reconhecimento por Imagem',
+        description: 'Tire uma foto da caixa do remédio e nossa IA irá identificá-lo para você.',
     },
     {
         icon: BarChart,
-        title: 'Organização Financeira e Gestão',
-        description: 'Relatórios de plantões e organização de recebimentos e pagamentos.',
+        title: 'Dados Confiáveis',
+        description: 'Utilizamos fontes de dados seguras para fornecer informações precisas.',
     },
     {
         icon: SlidersHorizontal,
-        title: 'Filtro por especialidade e região',
-        description: 'Encontre o plantão perfeito para você, baseado na sua região e especialidade.',
+        title: 'Interface Intuitiva',
+        description: 'Um design limpo e moderno para uma experiência de usuário agradável.',
     }
 ];
 
 export default function Features() {
   return (
-    <section className="py-16 sm:py-24 bg-background">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        <div className="px-4">
-            <h2 className="text-3xl lg:text-4xl font-bold font-headline text-primary mb-4">
-                Médico, deixe a dor de cabeça com a gente!
+    <section className="py-24 sm:py-32 bg-background">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-extrabold font-headline text-foreground tracking-tighter">
+                Tudo que você precisa em um só lugar
             </h2>
-            <p className="text-lg text-muted-foreground mb-10">
-                Se preocupe apenas em cumprir seus plantões...
+            <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
+                Nossa plataforma foi desenhada para ser sua assistente de saúde pessoal, fornecendo informações claras e rápidas sobre medicamentos.
             </p>
-            <div className="space-y-8">
-                {featureData.map((feature, index) => (
-                    <div key={index} className="flex items-start gap-4 p-4 rounded-lg bg-card shadow-sm hover:shadow-md transition-shadow">
-                        <div className="flex-shrink-0 bg-primary/10 text-primary p-3 rounded-full">
-                            <feature.icon className="h-6 w-6" />
-                        </div>
-                        <div>
-                            <h3 className="text-lg font-bold text-foreground">{feature.title}</h3>
-                            <p className="text-muted-foreground mt-1">{feature.description}</p>
-                        </div>
-                    </div>
-                ))}
-            </div>
         </div>
-        <div className="hidden md:flex justify-center items-center">
-          <Image
-            src="https://placehold.co/500x700.png"
-            alt="Médica sorrindo e usando o celular"
-            width={500}
-            height={700}
-            className="rounded-xl shadow-2xl object-cover"
-            data-ai-hint="smiling doctor phone"
-          />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {featureData.map((feature, index) => (
+                <Card key={index} className="bg-card border-none shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2">
+                    <CardHeader>
+                        <div className="flex-shrink-0 bg-primary/10 text-primary p-4 rounded-lg w-fit mb-4">
+                            <feature.icon className="h-8 w-8" />
+                        </div>
+                        <CardTitle className="text-xl font-bold">{feature.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <p className="text-muted-foreground">{feature.description}</p>
+                    </CardContent>
+                </Card>
+            ))}
         </div>
       </div>
     </section>
