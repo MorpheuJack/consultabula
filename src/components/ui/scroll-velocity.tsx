@@ -122,7 +122,7 @@ function VelocityText({
         style={parallaxStyle}
       >
         <motion.div
-          className={`${scrollerClassName} flex whitespace-nowrap text-center font-sans text-4xl font-bold tracking-[-0.02em] text-foreground drop-shadow md:text-[5rem] md:leading-[5rem]`}
+          className={`${scrollerClassName} flex whitespace-nowrap text-center font-sans text-4xl font-bold tracking-[-0.02em] text-white drop-shadow md:text-[5rem] md:leading-[5rem]`}
           style={{ x, ...scrollerStyle }}
         >
           {spans}
@@ -153,7 +153,12 @@ export const ScrollVelocity = ({
   ...rest
 }: ScrollVelocityProps) => {
   return (
-    <section className="py-8 bg-background">
+    <section 
+      className="py-8"
+      style={{
+        background: 'linear-gradient(135deg, #1D976C 0%, #93F9B9 100%)',
+      }}
+    >
       {texts.map((text, index) => (
         <VelocityText
           key={index}
