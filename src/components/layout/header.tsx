@@ -19,9 +19,6 @@ export default function Header() {
             <Button variant="ghost" asChild>
                 <Link href="/#features">Funcionalidades</Link>
             </Button>
-            <Button variant="outline" asChild>
-                <Link href="/app">Entrar</Link>
-            </Button>
             <Button asChild className="rounded-full shadow-lg hover:bg-accent/90 transition-colors">
                 <Link href="/app">Consultar Bula</Link>
             </Button>
