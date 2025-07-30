@@ -2,7 +2,7 @@
 import Features from '@/components/pharma/features';
 import Hero from '@/components/pharma/hero';
 import Header from '@/components/layout/header';
-import Footer from '@/components/layout/footer';
+
 import ScrollVelocity from '@/components/ui/scroll-velocity';
 
 
@@ -15,7 +15,6 @@ export default function Home() {
         <Features />
         <ScrollVelocity texts={['Consulta Bula', 'PharmaInfo AI']} velocity={20} />
       </main>
-      <Footer />
     </div>
   );
 }
