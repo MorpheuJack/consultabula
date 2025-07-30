@@ -140,9 +140,9 @@ O objeto JSON deve conter uma única chave principal: \`medicamento\`. O valor d
         Detalhes Adicionais: ${input.additionalDetails || 'Nenhum'}`
       }
     ],
-    model: 'llama-3.1-70b-versatile',
+    model: 'meta-llama/llama-4-scout-17b-16e-instruct',
     temperature: 0,
-    max_tokens: 8024,
+    max_tokens: 4096,
     top_p: 1,
     response_format: { type: 'json_object' },
   });
