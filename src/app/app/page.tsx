@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
 import { type MedicineInfo } from '@/lib/types';
@@ -17,6 +17,7 @@ export default function AppPage() {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const searchParams = useSearchParams();
+  const resultsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const medicineName = searchParams.get('medicineName');
@@ -24,11 +25,14 @@ export default function AppPage() {
       const formData = new FormData();
       formData.append('medicineName', medicineName);
       handleTextSubmit(formData);
-
-      // Optionally, clear the query param from URL without reloading
-      // window.history.replaceState(null, '', '/app');
     }
   }, [searchParams]);
+
+  useEffect(() => {
+    if (medicineInfo && !isLoading) {
+      resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [medicineInfo, isLoading]);
 
   const handleTextSubmit = async (formData: FormData) => {
     setIsLoading(true);
@@ -91,7 +95,7 @@ export default function AppPage() {
                 </div>
             </div>
 
-            <div className="mt-12 min-h-[300px] w-full max-w-3xl mx-auto">
+            <div ref={resultsRef} className="mt-12 min-h-[300px] w-full max-w-3xl mx-auto">
                 <AnimatePresence>
                   {isLoading && (
                     <motion.div
