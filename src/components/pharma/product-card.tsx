@@ -46,10 +46,6 @@ export default function ProductCard({ product }: ProductCardProps) {
           <p className="text-lg font-extrabold text-accent">
             R$ {product.price.toFixed(2).replace('.', ',')}
           </p>
-          <Button size="icon" variant="outline" className="text-accent hover:bg-accent/10" onClick={handleAddToCart}>
-            <ShoppingCart className="h-5 w-5" />
-            <span className="sr-only">Adicionar ao carrinho</span>
-          </Button>
         </CardFooter>
       </Card>
     </Link>

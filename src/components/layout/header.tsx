@@ -2,7 +2,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Menu, Pill, ShoppingCart } from 'lucide-react';
+import { Menu, Pill } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '../ui/sheet';
 
@@ -28,13 +28,6 @@ export default function Header() {
             <Button asChild className="rounded-full shadow-lg bg-white text-accent hover:bg-white/90 transition-colors">
                 <Link href="/app">Consultar Bula</Link>
             </Button>
-             <Button variant="ghost" size="icon" className="text-white hover:bg-white/10 relative">
-                <ShoppingCart className="h-6 w-6" />
-                <span className="sr-only">Carrinho de compras</span>
-                <span className="absolute -top-1 -right-1 bg-destructive text-destructive-foreground text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
-                    0
-                </span>
-            </Button>
         </nav>
         <div className="md:hidden">
             <Sheet>
@@ -52,12 +45,6 @@ export default function Header() {
                         <Link href="/#features" className="hover:text-accent transition-colors">Funcionalidades</Link>
                         <Link href="/shop" className="hover:text-accent transition-colors">Loja</Link>
                         <Link href="/app" className="hover:text-accent transition-colors">Consultar Bula</Link>
-                        <div className="border-t border-border pt-6">
-                            <Button variant="ghost" className="w-full justify-start gap-2 text-lg">
-                                <ShoppingCart className="h-6 w-6" />
-                                Carrinho (0)
-                            </Button>
-                        </div>
                     </nav>
                 </SheetContent>
             </Sheet>

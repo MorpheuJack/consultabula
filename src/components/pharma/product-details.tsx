@@ -42,10 +42,6 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
                     <span className="text-xl text-white/70 line-through">R$ {product.originalPrice.toFixed(2).replace('.', ',')}</span>
                 )}
             </div>
-            <Button size="lg" className="w-full md:w-fit text-lg bg-white text-accent hover:bg-white/90" onClick={handleAddToCart}>
-                <ShoppingCart className="mr-2 h-5 w-5" />
-                Adicionar ao Carrinho
-            </Button>
         </div>
     )
 }
