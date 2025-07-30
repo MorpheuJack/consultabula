@@ -50,10 +50,10 @@ export default function AppPage() {
             className="w-full max-w-3xl mx-auto space-y-8 text-center"
         >
             <h1 className="text-4xl lg:text-5xl font-extrabold font-headline text-primary leading-tight tracking-tighter">
-                Como podemos ajudar?
+                Consulte a bula do seu medicamento
             </h1>
             <p className="text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
-                Escolha uma das opções abaixo para obter informações sobre um medicamento.
+                Digite o nome ou envie uma foto do medicamento para obter as informações da bula instantaneamente.
             </p>
         </motion.div>
 

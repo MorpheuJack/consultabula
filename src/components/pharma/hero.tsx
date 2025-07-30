@@ -8,7 +8,7 @@ import { ArrowRight, Pill } from 'lucide-react';
 
 export default function Hero() {
   return (
-    <section className="relative w-full h-[calc(100vh-88px)] flex items-center bg-background overflow-hidden">
+    <section className="relative w-full h-[calc(100svh-88px)] flex items-center bg-background overflow-hidden">
         <div className="absolute inset-y-0 right-0 w-1/2">
              <Image
                 src="https://placehold.co/1200x1200.png"
@@ -28,10 +28,10 @@ export default function Hero() {
                     <Pill className="h-8 w-8 text-primary" />
                 </div>
                 <h1 className="text-5xl lg:text-7xl font-extrabold font-headline text-foreground leading-tight tracking-tighter mb-6">
-                    Sua Saúde, Simplificada.
+                    Bula de Remédio na Palma da Mão.
                 </h1>
                 <p className="mt-6 text-lg lg:text-xl text-muted-foreground max-w-xl">
-                    Obtenha informações claras e confiáveis sobre medicamentos. Tire suas dúvidas por texto ou imagem de forma rápida e segura.
+                    Consulte bulas de forma rápida e segura. Tire suas dúvidas sobre medicamentos por texto ou enviando uma foto da embalagem.
                 </p>
                 <div className="mt-10 flex gap-4">
                     <Link href="/app">

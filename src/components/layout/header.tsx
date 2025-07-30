@@ -12,7 +12,7 @@ export default function Header() {
                 <Pill className="h-6 w-6 text-primary" />
             </div>
             <span className="text-xl font-bold font-headline text-foreground">
-              PharmaInfo AI
+              Consulta Bula
             </span>
         </Link>
         <div className="flex items-center gap-4">
@@ -20,7 +20,7 @@ export default function Header() {
                 <Link href="/#features">Funcionalidades</Link>
             </Button>
             <Button asChild className="rounded-full shadow-md hover:shadow-lg transition-shadow">
-                <Link href="/app">Consultar Medicamento</Link>
+                <Link href="/app">Consultar Bula</Link>
             </Button>
         </div>
       </div>
