@@ -18,9 +18,6 @@ export default function Header() {
             <Button variant="ghost" asChild className="text-white hover:bg-white/10 hover:text-white">
                 <Link href="/#features">Funcionalidades</Link>
             </Button>
-            <Button variant="ghost" asChild className="text-white hover:bg-white/10 hover:text-white">
-                <Link href="/shop">Loja</Link>
-            </Button>
             <Button asChild className="rounded-full shadow-lg bg-white text-accent hover:bg-white/90 transition-colors">
                 <Link href="/app">Consultar Bula</Link>
             </Button>
@@ -39,7 +36,6 @@ export default function Header() {
                     </SheetHeader>
                     <nav className="flex flex-col gap-6 mt-12 text-lg">
                         <Link href="/#features" className="hover:text-accent transition-colors">Funcionalidades</Link>
-                        <Link href="/shop" className="hover:text-accent transition-colors">Loja</Link>
                         <Link href="/app" className="hover:text-accent transition-colors">Consultar Bula</Link>
                     </nav>
                 </SheetContent>

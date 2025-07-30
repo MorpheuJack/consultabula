@@ -40,7 +40,6 @@ export default function Footer({ bgColor = 'bg-background', textColor = 'text-fo
             </p>
             <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-6 text-sm">
                 <Link href="/#features" className="opacity-80 hover:opacity-100 transition-opacity">Funcionalidades</Link>
-                <Link href="/shop" className="opacity-80 hover:opacity-100 transition-opacity">Loja</Link>
                 <Link href="/app" className="opacity-80 hover:opacity-100 transition-opacity">Consultar Bula</Link>
             </nav>
             <div className="flex gap-5 mb-8">
