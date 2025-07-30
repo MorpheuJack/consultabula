@@ -46,7 +46,7 @@ export default function MedicineInfoCard({ info }: MedicineInfoCardProps) {
             duration={0.5}
             ease="power3.out"
         />
-        <CardDescription className="text-lg pt-1 text-muted-foreground">Aqui está o que encontramos sobre este medicamento.</CardDescription>
+        <CardDescription className="text-lg pt-1 text-muted-foreground">{info.summary}</CardDescription>
       </CardHeader>
       <CardContent className="p-8 pt-0">
         <Accordion type="multiple" className="w-full" defaultValue={['Usos', 'Contraindicações']}>

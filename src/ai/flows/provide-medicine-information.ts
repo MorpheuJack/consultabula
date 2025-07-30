@@ -21,6 +21,7 @@ const ProvideMedicineInformationInputSchema = z.object({
 export type ProvideMedicineInformationInput = z.infer<typeof ProvideMedicineInformationInputSchema>;
 
 const MedicineInformationSchema = z.object({
+  resumo: z.string().describe('Um resumo conciso de uma linha sobre para que serve o medicamento.'),
   usos: z.object({
     primarios: z.string(),
     secundarios: z.string(),
@@ -81,6 +82,7 @@ O objeto JSON deve conter uma única chave principal: \`medicamento\`. O valor d
 - \`principioAtivo\`: (String | null) O principal componente farmacológico do medicamento. Deve ser \`null\` se não for encontrado.
 - \`nomesComerciaisComuns\`: (Array de Strings | null) Uma lista de nomes de marca comuns no Brasil. Deve ser \`null\` se não for encontrado.
 - \`informacoes\`: (Objeto | null) Um objeto contendo os detalhes do medicamento. Será \`null\` se \`encontrado\` for \`false\`.
+  - \`resumo\`: (String) Um resumo conciso e de uma linha sobre o principal propósito do medicamento. Ex: "Analgésico e antitérmico para alívio de dores e febre."
   - \`usos\`: (Objeto) Contendo as chaves \`primarios\` (String) e \`secundarios\` (String). Use quebras de linha com "\\n-" para listar itens e melhorar a legibilidade.
   - \`contraindicacoes\`: (String) Lista detalhada de condições, alergias e interações que impedem o uso. Use "\\n-" para listar itens.
   - \`efeitosColaterais\`: (Objeto) Contendo as chaves \`comuns\` (String) e \`rarosMasGraves\` (String).
@@ -105,6 +107,7 @@ O objeto JSON deve conter uma única chave principal: \`medicamento\`. O valor d
     "principioAtivo": "Dipirona Monoidratada",
     "nomesComerciaisComuns": ["Novalgina", "Anador", "Magnopyrol"],
     "informacoes": {
+      "resumo": "Analgésico e antitérmico para o alívio de dores e redução da febre.",
       "usos": {
         "primarios": "Indicada principalmente como:\\n- Analgésico (alívio de dores).\\n- Antipirético (redução da febre).",
         "secundarios": "Pode ser usada em dores pós-operatórias e cólicas."

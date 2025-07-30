@@ -30,6 +30,7 @@ export async function getMedicineInfoFromText(formData: FormData): Promise<{ dat
         return {
             data: {
                 name: nomePesquisado,
+                summary: informacoes.resumo,
                 uses: `${informacoes.usos.primarios}\n${informacoes.usos.secundarios}`,
                 contraindications: informacoes.contraindicacoes,
                 sideEffects: `Comuns: ${informacoes.efeitosColaterais.comuns}\nRaros mas Graves: ${informacoes.efeitosColaterais.rarosMasGraves}`,
@@ -62,7 +63,15 @@ export async function getMedicineInfoFromImage(formData: FormData): Promise<{ da
             return { error: 'Não foi possível reconhecer o medicamento na imagem.' };
         }
         
-        return { data: result.medicineInfo };
+        // O fluxo de imagem não retorna um resumo separado, então vamos criar um a partir dos usos.
+        const summary = result.medicineInfo.uses.split('\n')[0];
+
+        return { 
+            data: {
+                ...result.medicineInfo,
+                summary: summary,
+            } 
+        };
     } catch (e) {
         console.error(e);
         return { error: e instanceof Error ? e.message : 'Ocorreu um erro desconhecido ao processar a imagem.' };

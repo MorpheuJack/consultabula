@@ -1,6 +1,7 @@
 
 export type MedicineInfo = {
   name: string;
+  summary: string;
   uses: string;
   contraindications: string;
   sideEffects?: string | null;
