@@ -11,14 +11,14 @@ type MedicineInfoCardProps = {
 const InfoSection = ({ title, content, icon: Icon }: { title: string; content?: string | null; icon: React.ElementType }) => {
   if (!content) return null;
   return (
-    <AccordionItem value={title}>
-      <AccordionTrigger className="text-lg hover:no-underline font-semibold">
+    <AccordionItem value={title} className="border-b-white/10">
+      <AccordionTrigger className="text-lg hover:no-underline font-semibold py-5">
         <div className="flex items-center gap-3">
-          <Icon className="h-6 w-6 text-primary" />
+          <Icon className="h-6 w-6 text-accent" />
           <span>{title}</span>
         </div>
       </AccordionTrigger>
-      <AccordionContent className="text-base prose prose-sm max-w-none text-muted-foreground pt-2">
+      <AccordionContent className="text-base prose prose-sm max-w-none text-muted-foreground pt-2 pl-12">
         {content.split('\n').map((line, index) => (
           <p key={index}>{line}</p>
         ))}
@@ -29,10 +29,10 @@ const InfoSection = ({ title, content, icon: Icon }: { title: string; content?: 
 
 export default function MedicineInfoCard({ info }: MedicineInfoCardProps) {
   return (
-    <Card className="shadow-2xl bg-card border-none animate-in fade-in-50 duration-500 rounded-2xl">
+    <Card className="shadow-2xl shadow-black/30 bg-card/60 backdrop-blur-md border border-white/10 rounded-2xl">
       <CardHeader className="p-8">
-        <CardTitle className="text-4xl font-extrabold font-headline text-foreground tracking-tighter">{info.name}</CardTitle>
-        <CardDescription className="text-lg pt-1">Aqui está o que encontramos sobre este medicamento.</CardDescription>
+        <CardTitle className="text-4xl font-extrabold font-headline text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-300 tracking-tighter">{info.name}</CardTitle>
+        <CardDescription className="text-lg pt-1 text-slate-400">Aqui está o que encontramos sobre este medicamento.</CardDescription>
       </CardHeader>
       <CardContent className="p-8 pt-0">
         <Accordion type="multiple" className="w-full" defaultValue={['Usos', 'Contraindicações']}>
@@ -49,23 +49,23 @@ export default function MedicineInfoCard({ info }: MedicineInfoCardProps) {
 
 MedicineInfoCard.Skeleton = function MedicineInfoCardSkeleton() {
     return (
-        <Card className="shadow-2xl border-none rounded-2xl">
+        <Card className="shadow-2xl shadow-black/30 bg-card/60 backdrop-blur-md border-white/10 rounded-2xl">
             <CardHeader className="p-8">
-                <Skeleton className="h-10 w-3/5 rounded-md" />
-                <Skeleton className="h-6 w-4/5 mt-3 rounded-md" />
+                <Skeleton className="h-10 w-3/5 rounded-md bg-white/10" />
+                <Skeleton className="h-6 w-4/5 mt-3 rounded-md bg-white/10" />
             </CardHeader>
             <CardContent className="p-8 pt-0 space-y-6">
-                <div className="space-y-3 border-b pb-4">
-                    <Skeleton className="h-7 w-1/4 rounded-md" />
-                    <Skeleton className="h-5 w-full rounded-md" />
-                    <Skeleton className="h-5 w-5/6 rounded-md" />
+                <div className="space-y-3 border-b border-b-white/10 pb-4">
+                    <Skeleton className="h-7 w-1/4 rounded-md bg-white/10" />
+                    <Skeleton className="h-5 w-full rounded-md bg-white/10" />
+                    <Skeleton className="h-5 w-5/6 rounded-md bg-white/10" />
                 </div>
-                 <div className="space-y-3 border-b pb-4">
-                    <Skeleton className="h-7 w-1/3 rounded-md" />
-                    <Skeleton className="h-5 w-full rounded-md" />
+                 <div className="space-y-3 border-b border-b-white/10 pb-4">
+                    <Skeleton className="h-7 w-1/3 rounded-md bg-white/10" />
+                    <Skeleton className="h-5 w-full rounded-md bg-white/10" />
                 </div>
                 <div className="space-y-3">
-                    <Skeleton className="h-7 w-1/4 rounded-md" />
+                    <Skeleton className="h-7 w-1/4 rounded-md bg-white/10" />
                 </div>
             </CardContent>
         </Card>
