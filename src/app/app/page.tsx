@@ -69,33 +69,29 @@ export default function AppPage() {
         }}
     >
        <Header />
-       <main className="flex-grow container mx-auto px-4 py-8 md:py-12 flex flex-col items-center justify-center">
-        <div className="w-full max-w-3xl space-y-12 mt-24">
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="w-full mx-auto space-y-8 text-center"
-            >
-                <SplitText
-                  as="h1"
-                  text="Consulte a bula do seu medicamento"
-                  className="text-4xl lg:text-5xl font-extrabold font-headline text-white tracking-tighter"
-                  splitType="words"
-                  from={{ opacity: 0, y: 20 }}
-                  to={{ opacity: 1, y: 0 }}
-                  delay={50}
-                  duration={0.6}
-                  ease="power3.out"
-                />
-                <p className="text-lg lg:text-xl text-white/90 max-w-2xl mx-auto">
-                    Digite o nome ou envie uma foto do medicamento para obter informações sobre dosagem, efeitos e muito mais.
-                </p>
-            </motion.div>
+       <main className="flex-grow container mx-auto px-4 flex flex-col items-center justify-center">
+        <div className="w-full max-w-6xl mt-24">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <motion.div
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    className="space-y-6 text-center md:text-left"
+                >
+                    <h1 className="text-4xl lg:text-5xl font-extrabold font-headline text-white tracking-tighter">
+                        Consulte a bula do seu medicamento
+                    </h1>
+                    <p className="text-lg lg:text-xl text-white/90">
+                        Digite o nome ou envie uma foto do medicamento para obter informações sobre dosagem, efeitos e muito mais.
+                    </p>
+                </motion.div>
+                
+                <div className="w-full">
+                   <InputArea onTextSubmit={handleTextSubmit} onImageSubmit={handleImageSubmit} isLoading={isLoading} />
+                </div>
+            </div>
 
-            <div className="w-full mx-auto">
-               <InputArea onTextSubmit={handleTextSubmit} onImageSubmit={handleImageSubmit} isLoading={isLoading} />
-               <div className="mt-8 min-h-[300px]">
+            <div className="mt-12 min-h-[300px] w-full max-w-3xl mx-auto">
                 <AnimatePresence>
                   {isLoading && (
                     <motion.div
@@ -119,7 +115,6 @@ export default function AppPage() {
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </div>
             </div>
         </div>
       </main>
