@@ -3,7 +3,6 @@
 
 import Header from '@/components/layout/header';
 import Hero from '@/components/pharma/hero';
-import Disclaimer from '@/components/pharma/disclaimer';
 
 export default function Home() {
   return (
@@ -14,7 +13,6 @@ export default function Home() {
       </main>
       <footer className="w-full py-6 bg-card border-t">
         <div className="container mx-auto px-4 max-w-3xl">
-          <Disclaimer />
         </div>
       </footer>
     </div>

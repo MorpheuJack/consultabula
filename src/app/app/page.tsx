@@ -8,7 +8,6 @@ import { getMedicineInfoFromImage, getMedicineInfoFromText } from '@/app/actions
 import Header from '@/components/layout/header';
 import InputArea from '@/components/pharma/input-area';
 import MedicineInfoCard from '@/components/pharma/medicine-info-card';
-import Disclaimer from '@/components/pharma/disclaimer';
 
 export default function AppPage() {
   const [medicineInfo, setMedicineInfo] = useState<MedicineInfo | null>(null);
@@ -59,7 +58,6 @@ export default function AppPage() {
       </main>
       <footer className="w-full py-6">
         <div className="container mx-auto px-4 max-w-3xl">
-          <Disclaimer />
         </div>
       </footer>
     </div>
