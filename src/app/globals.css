@@ -8,17 +8,17 @@ body {
 
 @layer base {
   :root {
-    --background: 210 29% 97%; /* Light grey (#F0F4F8) */
+    --background: 255 100% 100%; /* White */
     --foreground: 224 71% 4%; /* Dark Blue */
     
-    --card: 255 100% 100%; /* White */
+    --card: 210 29% 97%; /* Light grey (#F0F4F8) */
     --card-foreground: 224 71% 4%;
 
     --popover: 255 100% 100%;
     --popover-foreground: 224 71% 4%;
     
-    --primary: 207 82% 71%; /* Soft blue (#64B5F6) */
-    --primary-foreground: 224 71% 4%;
+    --primary: 207 82% 61%; /* Brighter Blue (#64B5F6) */
+    --primary-foreground: 210 20% 98%;
 
     --secondary: 210 29% 92%; /* Lighter grey */
     --secondary-foreground: 224 71% 4%;
@@ -26,15 +26,15 @@ body {
     --muted: 210 29% 92%;
     --muted-foreground: 220 10% 45%; /* Grey for text */
     
-    --accent: 174 60% 44%; /* Teal (#26A69A) */
+    --accent: 174 70% 48%; /* Teal (#26A69A) */
     --accent-foreground: 210 20% 98%; /* Almost white */
 
     --destructive: 0 72% 51%; /* Red for alerts */
     --destructive-foreground: 210 20% 98%;
 
     --border: 215 28% 88%; /* Subtle border */
-    --input: 215 28% 94%;
-    --ring: 207 82% 71%;
+    --input: 210 29% 97%;
+    --ring: 207 82% 61%;
 
     --radius: 0.75rem;
 

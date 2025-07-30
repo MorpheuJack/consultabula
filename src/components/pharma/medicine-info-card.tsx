@@ -11,10 +11,10 @@ type MedicineInfoCardProps = {
 const InfoSection = ({ title, content, icon: Icon }: { title: string; content?: string | null; icon: React.ElementType }) => {
   if (!content) return null;
   return (
-    <AccordionItem value={title} className="border-b">
+    <AccordionItem value={title} className="border-b-0">
       <AccordionTrigger className="text-lg hover:no-underline font-semibold py-5">
         <div className="flex items-center gap-3">
-          <Icon className="h-6 w-6 text-accent" />
+          <Icon className="h-6 w-6 text-primary" />
           <span>{title}</span>
         </div>
       </AccordionTrigger>
@@ -29,9 +29,9 @@ const InfoSection = ({ title, content, icon: Icon }: { title: string; content?: 
 
 export default function MedicineInfoCard({ info }: MedicineInfoCardProps) {
   return (
-    <Card className="shadow-lg bg-card border rounded-2xl">
+    <Card className="shadow-lg bg-card border-none rounded-2xl">
       <CardHeader className="p-8">
-        <CardTitle className="text-4xl font-extrabold font-headline text-primary tracking-tighter">{info.name}</CardTitle>
+        <CardTitle className="text-4xl font-extrabold font-headline text-foreground tracking-tighter">{info.name}</CardTitle>
         <CardDescription className="text-lg pt-1 text-muted-foreground">Aqui está o que encontramos sobre este medicamento.</CardDescription>
       </CardHeader>
       <CardContent className="p-8 pt-0">
@@ -49,18 +49,18 @@ export default function MedicineInfoCard({ info }: MedicineInfoCardProps) {
 
 MedicineInfoCard.Skeleton = function MedicineInfoCardSkeleton() {
     return (
-        <Card className="shadow-lg bg-card border rounded-2xl">
+        <Card className="shadow-lg bg-card border-none rounded-2xl">
             <CardHeader className="p-8">
                 <Skeleton className="h-10 w-3/5 rounded-md" />
                 <Skeleton className="h-6 w-4/5 mt-3 rounded-md" />
             </CardHeader>
             <CardContent className="p-8 pt-0 space-y-6">
-                <div className="space-y-3 border-b pb-4">
+                <div className="space-y-3 border-b-0 pb-4">
                     <Skeleton className="h-7 w-1/4 rounded-md" />
                     <Skeleton className="h-5 w-full rounded-md" />
                     <Skeleton className="h-5 w-5/6 rounded-md" />
                 </div>
-                 <div className="space-y-3 border-b pb-4">
+                 <div className="space-y-3 border-b-0 pb-4">
                     <Skeleton className="h-7 w-1/3 rounded-md" />
                     <Skeleton className="h-5 w-full rounded-md" />
                 </div>

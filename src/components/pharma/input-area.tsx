@@ -144,12 +144,12 @@ export default function InputArea({ onTextSubmit, onImageSubmit, isLoading }: In
       transition={{ duration: 0.5, delay: 0.2 }}
       className="w-full"
     >
-      <Card className="bg-card shadow-lg rounded-2xl border">
+      <Card className="bg-card shadow-lg rounded-2xl border-none">
         <CardContent className="p-2">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-3 bg-secondary p-1 h-12">
-              <TabsTrigger value="text" className="rounded-lg text-lg data-[state=active]:bg-accent data-[state=active]:text-accent-foreground"><FileText className="mr-2 h-5 w-5" />Texto</TabsTrigger>
-              <TabsTrigger value="image" className="rounded-lg text-lg data-[state=active]:bg-accent data-[state=active]:text-accent-foreground"><ImageIcon className="mr-2 h-5 w-5" />Imagem</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-3 bg-secondary/80 p-1 h-12">
+              <TabsTrigger value="text" className="rounded-lg text-lg data-[state=active]:bg-card data-[state=active]:text-primary data-[state=active]:shadow-md"><FileText className="mr-2 h-5 w-5" />Texto</TabsTrigger>
+              <TabsTrigger value="image" className="rounded-lg text-lg data-[state=active]:bg-card data-[state=active]:text-primary data-[state=active]:shadow-md"><ImageIcon className="mr-2 h-5 w-5" />Imagem</TabsTrigger>
               <TabsTrigger value="voice" disabled className="rounded-lg text-lg">
                   <TooltipProvider>
                       <Tooltip>
