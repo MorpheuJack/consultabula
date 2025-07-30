@@ -4,13 +4,12 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Search } from 'lucide-react';
-import SplitText from '../ui/split-text';
 import ScrollFloat from '../ui/scroll-float';
 
 export default function Hero() {
   return (
     <section 
-        className="relative w-full min-h-screen flex flex-col items-center justify-center text-center text-white p-4"
+        className="relative w-full min-h-screen flex flex-col items-center justify-center text-center p-4"
         style={{
             background: 'linear-gradient(135deg, #1D976C 0%, #93F9B9 100%)',
             backgroundImage: `
@@ -23,7 +22,7 @@ export default function Hero() {
     >
         <div className="container mx-auto px-4 z-10 flex flex-col items-center">
             <ScrollFloat
-                textClassName="text-5xl lg:text-7xl font-extrabold font-headline leading-tight tracking-tighter mb-6"
+                textClassName="text-5xl lg:text-7xl font-extrabold font-headline leading-tight tracking-tighter mb-6 text-white"
                 containerClassName='mb-6'
             >
                 Precisa consultar a bula de um remédio?
