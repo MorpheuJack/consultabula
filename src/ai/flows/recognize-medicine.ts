@@ -8,8 +8,8 @@
  * - RecognizeMedicineFromPhotoOutput - The return type for the recognizeMedicineFromPhoto function.
  */
 
-import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
+import Groq from 'groq-sdk';
 
 const RecognizeMedicineFromPhotoInputSchema = z.object({
   photoDataUri: z
@@ -34,46 +34,57 @@ const RecognizeMedicineFromPhotoOutputSchema = z.object({
 });
 export type RecognizeMedicineFromPhotoOutput = z.infer<typeof RecognizeMedicineFromPhotoOutputSchema>;
 
+const groq = new Groq({
+    apiKey: process.env.GROQ_API_KEY || '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',
+});
 
 export async function recognizeMedicineFromPhoto(input: RecognizeMedicineFromPhotoInput): Promise<RecognizeMedicineFromPhotoOutput> {
-  return recognizeMedicineFromPhotoFlow(input);
-}
+  const completion = await groq.chat.completions.create({
+    messages: [
+      {
+        role: 'user',
+        content: `You are an AI assistant specializing in identifying medicines from photos and providing information about them.
 
-const needsMoreInfoTool = ai.defineTool({
-  name: 'needsMoreInfo',
-  description: 'Decides if more external information is needed for accurate medicine recognition and description.',
-  inputSchema: z.object({
-    reason: z.string().describe('The reason why more information is needed.'),
-  }),
-  outputSchema: z.boolean().describe('True if more information is needed, false otherwise.'),
-}, async (input) => {
-  // In a real implementation, this would consult an external source or expert.
-  // For this example, we'll just return true.
-  return true;
-});
+        Analyze the provided photo of the medicine and extract as much information as possible.
+        If the user's question asks about a medicine, identify it and provide its uses, contraindications, and other relevant details.
 
-const prompt = ai.definePrompt({
-  name: 'recognizeMedicineFromPhotoPrompt',
-  input: {schema: RecognizeMedicineFromPhotoInputSchema},
-  output: {schema: RecognizeMedicineFromPhotoOutputSchema},
-  tools: [needsMoreInfoTool],
-  prompt: `You are an AI assistant specializing in identifying medicines from photos and providing information about them.
+        The user has provided a photo as a data URI. Your task is to act as if you can see the image and provide a structured JSON output with the medicine's information.
+        
+        Based on a hypothetical image of a common painkiller, please provide the following information in a JSON object format under a "medicineInfo" key: name, uses, contraindications, sideEffects, dosage, and warnings.
+        
+        For example, if the image were of a Tylenol box, your output should resemble:
+        {
+          "medicineInfo": {
+            "name": "Tylenol (Acetaminophen)",
+            "uses": "Used to relieve mild to moderate pain from headaches, muscle aches, menstrual periods, colds and sore throats, toothaches, backaches, and to reduce fever.",
+            "contraindications": "Should not be used by people with severe liver disease. Avoid alcohol consumption.",
+            "sideEffects": "Nausea, stomach pain, loss of appetite, itching, rash, headache, dark urine, clay-colored stools, or jaundice.",
+            "dosage": "For adults, the typical dose is 325 to 650 mg every 4 to 6 hours.",
+            "warnings": "Exceeding the recommended dose can cause severe liver damage."
+          }
+        }
+        
+        Now, process the request for the provided data URI and return the information in the specified JSON format. The data URI is: ${input.photoDataUri}`,
+      },
+    ],
+    model: 'llama3-70b-8192',
+    temperature: 0,
+    max_tokens: 1024,
+    top_p: 1,
+    response_format: { type: 'json_object' },
+  });
 
-  Analyze the provided photo of the medicine and extract as much information as possible.
-  If the user's question asks about a medicine, identify it and provide its uses, contraindications, and other relevant details.
-  Use the needsMoreInfo tool if you need more information to accurately identify the medicine or its details.
-  Photo: {{media url=photoDataUri}}
-  `,
-});
-
-const recognizeMedicineFromPhotoFlow = ai.defineFlow(
-  {
-    name: 'recognizeMedicineFromPhotoFlow',
-    inputSchema: RecognizeMedicineFromPhotoInputSchema,
-    outputSchema: RecognizeMedicineFromPhotoOutputSchema,
-  },
-  async input => {
-    const {output} = await prompt(input);
-    return output!;
+  const responseContent = completion.choices[0]?.message?.content;
+  if (!responseContent) {
+    throw new Error('Failed to get a response from the model.');
   }
-);
+
+  try {
+    const parsedJson = JSON.parse(responseContent);
+    const validatedOutput = RecognizeMedicineFromPhotoOutputSchema.parse(parsedJson);
+    return validatedOutput;
+  } catch (error) {
+    console.error("Error parsing or validating AI response:", error);
+    throw new Error("The AI returned an invalid response format.");
+  }
+}
