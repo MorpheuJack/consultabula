@@ -79,7 +79,8 @@ export async function getMedicineInfoFromImage(formData: FormData): Promise<{ da
 
 export async function getShoppingResults(medicineName: string): Promise<{ data?: ShoppingResult[]; error?: string }> {
     if (!process.env.NEXT_PUBLIC_SERPAPI_API_KEY) {
-        return { error: "A chave da API da SerpApi não foi configurada." };
+        console.log("A chave da API da SerpApi não foi configurada.");
+        return { data: [] }; // Retorna vazio para não mostrar erro na UI
     }
 
     const url = `https://serpapi.com/search.json?engine=google_shopping&q=${encodeURIComponent(medicineName)}&hl=pt-br&gl=br&api_key=${process.env.NEXT_PUBLIC_SERPAPI_API_KEY}`;
@@ -88,7 +89,8 @@ export async function getShoppingResults(medicineName: string): Promise<{ data?:
         const response = await fetch(url);
         if (!response.ok) {
             const errorData = await response.json();
-            return { error: `Erro na SerpApi: ${errorData.error || response.statusText}` };
+            console.error(`Erro na SerpApi: ${errorData.error || response.statusText}`);
+            return { data: [] }; // Retorna vazio em caso de erro da API
         }
         const data = await response.json();
         if (!data.shopping_results || data.shopping_results.length === 0) {
@@ -100,7 +102,7 @@ export async function getShoppingResults(medicineName: string): Promise<{ data?:
             .map((item: any) => ({
                 position: item.position,
                 title: item.title,
-                link: item.link,
+                link: item.link || `https://www.google.com/search?q=${encodeURIComponent(item.title)}&tbm=shop`,
                 price: item.price,
                 source: item.source,
                 thumbnail: item.thumbnail,
