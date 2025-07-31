@@ -2,11 +2,34 @@
 'use client';
 
 import { HeartPulse, Search, SlidersHorizontal, BarChart } from 'lucide-react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import ScrollReveal from '../ui/scroll-reveal';
 import dynamic from 'next/dynamic';
-import MagicBento from '../ui/magic-bento';
 
 const SplitText = dynamic(() => import('../ui/split-text-client'), { ssr: false });
+
+const featureData = [
+  {
+    icon: HeartPulse,
+    title: 'Consulta por Texto',
+    description: 'Digite o nome do medicamento e tenha acesso instantâneo a informações vitais.',
+  },
+  {
+    icon: Search,
+    title: 'Análise por Imagem',
+    description: 'Envie uma foto da embalagem e nossa IA identifica o medicamento para você.',
+  },
+  {
+    icon: BarChart,
+    title: 'Informação Confiável',
+    description: 'Acesse dados seguros e atualizados para tomar decisões com mais confiança.',
+  },
+  {
+    icon: SlidersHorizontal,
+    title: 'Interface Intuitiva',
+    description: 'Navegue em um ambiente claro e objetivo, focado no que realmente importa.',
+  },
+];
 
 export default function Features() {
   return (
@@ -31,19 +54,29 @@ export default function Features() {
               Desenvolvemos uma ferramenta completa para que você tenha acesso rápido e seguro a informações sobre medicamentos, na palma da sua mão.
             </ScrollReveal>
         </div>
-        <div className="flex justify-center">
-            <MagicBento
-                textAutoHide={true}
-                enableStars={true}
-                enableSpotlight={true}
-                enableBorderGlow={true}
-                enableTilt={true}
-                enableMagnetism={true}
-                clickEffect={true}
-                spotlightRadius={300}
-                particleCount={12}
-                glowColor="174, 96, 90" 
-            />
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {featureData.map((feature, index) => {
+                const Icon = feature.icon;
+                return (
+                    <Card 
+                        key={index}
+                        className="bg-card border-none shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 text-left rounded-2xl"
+                    >
+                        <CardHeader>
+                            <div className="p-3 bg-accent/10 rounded-lg w-fit mb-4">
+                                <Icon className="h-7 w-7 text-accent" />
+                            </div>
+                            <CardTitle className="text-lg font-bold text-card-foreground">{feature.title}</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <CardDescription className="text-muted-foreground">
+                                {feature.description}
+                            </CardDescription>
+                        </CardContent>
+                    </Card>
+                )
+            })}
         </div>
       </div>
     </section>
