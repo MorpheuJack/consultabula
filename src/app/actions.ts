@@ -97,7 +97,6 @@ export async function getShoppingResults(medicineName: string): Promise<{ data?:
 
         const shoppingResults: ShoppingResult[] = data.shopping_results
             .slice(0, 5) // Pega apenas os 5 primeiros resultados
-            .filter((item: any) => item.link) // Garante que apenas itens com link sejam processados
             .map((item: any) => ({
                 position: item.position,
                 title: item.title,

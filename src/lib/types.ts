@@ -23,7 +23,7 @@ export type Product = {
 export type ShoppingResult = {
   position: number;
   title: string;
-  link: string;
+  link?: string;
   price: string;
   source: string;
   thumbnail: string;

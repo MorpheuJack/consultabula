@@ -11,8 +11,7 @@ type ShoppingResultCardProps = {
 };
 
 export default function ShoppingResultCard({ item }: ShoppingResultCardProps) {
-  return (
-    <Link href={item.link} target="_blank" rel="noopener noreferrer" className="flex flex-col h-full group">
+    const content = (
       <Card className="flex flex-col h-full overflow-hidden rounded-lg shadow-lg bg-card/80 backdrop-blur-sm border-white/20 text-white group-hover:shadow-xl transition-all duration-300 group-hover:-translate-y-1">
         <CardHeader className="p-0 relative">
           <Image
@@ -33,6 +32,15 @@ export default function ShoppingResultCard({ item }: ShoppingResultCardProps) {
           </p>
         </CardFooter>
       </Card>
-    </Link>
-  );
+    );
+
+    if (item.link) {
+      return (
+        <Link href={item.link} target="_blank" rel="noopener noreferrer" className="flex flex-col h-full group">
+          {content}
+        </Link>
+      );
+    }
+
+    return <div className="flex flex-col h-full">{content}</div>;
 }
