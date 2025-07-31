@@ -4,20 +4,24 @@
 import { Suspense, useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
-import { type MedicineInfo } from '@/lib/types';
-import { getMedicineInfoFromImage, getMedicineInfoFromText } from '@/app/actions';
+import { type MedicineInfo, type ShoppingResult } from '@/lib/types';
+import { getMedicineInfoFromImage, getMedicineInfoFromText, getShoppingResults } from '@/app/actions';
 import Header from '@/components/layout/header';
 import InputArea from '@/components/pharma/input-area';
 import MedicineInfoCard from '@/components/pharma/medicine-info-card';
 import { motion, AnimatePresence } from 'framer-motion';
 import Footer from '@/components/layout/footer';
 import dynamic from 'next/dynamic';
+import ShoppingResultCard from '@/components/pharma/shopping-result-card';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const SplitText = dynamic(() => import('@/components/ui/split-text-client'), { ssr: false });
 
 function PageContent() {
   const [medicineInfo, setMedicineInfo] = useState<MedicineInfo | null>(null);
+  const [shoppingResults, setShoppingResults] = useState<ShoppingResult[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isShoppingLoading, setIsShoppingLoading] = useState(false);
   const { toast } = useToast();
   const searchParams = useSearchParams();
   const resultsRef = useRef<HTMLDivElement>(null);
@@ -33,19 +37,37 @@ function PageContent() {
   }, [searchParams]);
 
   useEffect(() => {
-    if (medicineInfo && !isLoading) {
+    if ((medicineInfo || shoppingResults.length > 0) && !isLoading) {
       resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-  }, [medicineInfo, isLoading]);
+  }, [medicineInfo, shoppingResults, isLoading]);
+
+  const fetchShoppingResults = async (name: string) => {
+    setIsShoppingLoading(true);
+    const shopping = await getShoppingResults(name);
+    if (shopping.error) {
+        // Não mostra toast de erro para shopping, para não poluir
+        console.error(shopping.error);
+        setShoppingResults([]);
+    } else if (shopping.data) {
+        setShoppingResults(shopping.data);
+    }
+    setIsShoppingLoading(false);
+  }
 
   const handleTextSubmit = async (formData: FormData) => {
     setIsLoading(true);
     setMedicineInfo(null);
-    const result = await getMedicineInfoFromText(formData);
-    if (result.error) {
-      toast({ variant: 'destructive', title: 'Erro', description: result.error });
-    } else if (result.data) {
-      setMedicineInfo(result.data);
+    setShoppingResults([]);
+    const medicineName = formData.get('medicineName') as string;
+
+    const infoResult = await getMedicineInfoFromText(formData);
+    
+    if (infoResult.error) {
+      toast({ variant: 'destructive', title: 'Erro', description: infoResult.error });
+    } else if (infoResult.data) {
+      setMedicineInfo(infoResult.data);
+      fetchShoppingResults(infoResult.data.name);
     }
     setIsLoading(false);
   };
@@ -53,11 +75,14 @@ function PageContent() {
   const handleImageSubmit = async (formData: FormData) => {
     setIsLoading(true);
     setMedicineInfo(null);
+    setShoppingResults([]);
+    
     const result = await getMedicineInfoFromImage(formData);
     if (result.error) {
       toast({ variant: 'destructive', title: 'Erro', description: result.error });
     } else if (result.data) {
       setMedicineInfo(result.data);
+      fetchShoppingResults(result.data.name);
     }
     setIsLoading(false);
   };
@@ -99,7 +124,7 @@ function PageContent() {
                 </div>
             </div>
 
-            <div ref={resultsRef} className="mt-12 min-h-[300px] w-full max-w-3xl mx-auto">
+            <div ref={resultsRef} className="mt-12 min-h-[300px] w-full max-w-4xl mx-auto">
                 <AnimatePresence>
                   {isLoading && (
                     <motion.div
@@ -113,35 +138,72 @@ function PageContent() {
                     </motion.div>
                   )}
                   {medicineInfo && !isLoading && (
-                    <>
-                      <motion.div
-                        key="card"
-                        initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                        animate={{ opacity: 1, scale: 1, y: 0 }}
-                        transition={{ duration: 0.4, ease: 'easeOut' }}
-                      >
-                        <MedicineInfoCard info={medicineInfo} />
-                      </motion.div>
-                      <motion.div
-                        key="map"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.4, delay: 0.1, ease: 'easeOut' }}
-                        className="mt-8"
-                      >
-                        <h2 className="text-2xl font-bold text-white mb-4">Farmácias Próximas</h2>
-                        <div className="relative rounded-2xl overflow-hidden border-2 border-white/20 shadow-lg pb-[56.25%] h-0">
-                          <iframe 
-                            src="https://www.google.com/maps/d/embed?mid=1WWyjT09BgIH4DO0DHqofvc2eMRw-8tU&ehbc=2E312F&noprof=1" 
-                            className="absolute top-0 left-0 w-full h-full"
-                            style={{ border: 0, marginTop: '-58px' }}
-                            allowFullScreen={false}
-                            loading="lazy"
-                            referrerPolicy="no-referrer-when-downgrade"
-                          ></iframe>
-                        </div>
-                      </motion.div>
-                    </>
+                    <motion.div
+                      key="card"
+                      initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      transition={{ duration: 0.4, ease: 'easeOut' }}
+                    >
+                      <MedicineInfoCard info={medicineInfo} />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                <AnimatePresence>
+                  {isShoppingLoading && (
+                    <motion.div
+                      key="shopping-skeleton"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.3 }}
+                      className="mt-8"
+                    >
+                      <h2 className="text-2xl font-bold text-white mb-4">Onde Comprar</h2>
+                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                        {[...Array(5)].map((_, i) => <Skeleton key={i} className="h-48 w-full rounded-lg" />)}
+                      </div>
+                    </motion.div>
+                  )}
+                  {shoppingResults.length > 0 && !isShoppingLoading && (
+                    <motion.div
+                      key="shopping"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: 0.2, ease: 'easeOut' }}
+                      className="mt-8"
+                    >
+                      <h2 className="text-2xl font-bold text-white mb-4">Onde Comprar</h2>
+                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                        {shoppingResults.map(item => (
+                          <ShoppingResultCard key={item.position} item={item} />
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                <AnimatePresence>
+                  {medicineInfo && !isLoading && (
+                    <motion.div
+                      key="map"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: 0.1, ease: 'easeOut' }}
+                      className="mt-8"
+                    >
+                      <h2 className="text-2xl font-bold text-white mb-4">Farmácias Próximas</h2>
+                      <div className="relative rounded-2xl overflow-hidden border-2 border-white/20 shadow-lg pb-[56.25%] h-0">
+                        <iframe 
+                          src="https://www.google.com/maps/d/embed?mid=1WWyjT09BgIH4DO0DHqofvc2eMRw-8tU&ehbc=2E312F&noprof=1" 
+                          className="absolute top-0 left-0 w-full h-full"
+                          style={{ border: 0, marginTop: '-58px' }}
+                          allowFullScreen={false}
+                          loading="lazy"
+                          referrerPolicy="no-referrer-when-downgrade"
+                        ></iframe>
+                      </div>
+                    </motion.div>
                   )}
                 </AnimatePresence>
             </div>

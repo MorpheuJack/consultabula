@@ -2,7 +2,7 @@
 
 import { provideMedicineInformation } from '@/ai/flows/provide-medicine-information';
 import { recognizeMedicineFromPhoto } from '@/ai/flows/recognize-medicine';
-import { type MedicineInfo } from '@/lib/types';
+import { type MedicineInfo, type ShoppingResult } from '@/lib/types';
 import { z } from 'zod';
 
 const textSchema = z.object({
@@ -63,7 +63,6 @@ export async function getMedicineInfoFromImage(formData: FormData): Promise<{ da
             return { error: 'Não foi possível reconhecer o medicamento na imagem.' };
         }
         
-        // O fluxo de imagem não retorna um resumo separado, então vamos criar um a partir dos usos.
         const summary = result.medicineInfo.uses.split('\n')[0];
 
         return { 
@@ -75,5 +74,41 @@ export async function getMedicineInfoFromImage(formData: FormData): Promise<{ da
     } catch (e) {
         console.error(e);
         return { error: e instanceof Error ? e.message : 'Ocorreu um erro desconhecido ao processar a imagem.' };
+    }
+}
+
+export async function getShoppingResults(medicineName: string): Promise<{ data?: ShoppingResult[]; error?: string }> {
+    if (!process.env.SERPAPI_API_KEY) {
+        return { error: "A chave da API da SerpApi não foi configurada." };
+    }
+
+    const url = `https://serpapi.com/search.json?engine=google_shopping&q=${encodeURIComponent(medicineName)}&hl=pt-br&gl=br&api_key=${process.env.SERPAPI_API_KEY}`;
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            const errorData = await response.json();
+            return { error: `Erro na SerpApi: ${errorData.error || response.statusText}` };
+        }
+        const data = await response.json();
+        if (!data.shopping_results || data.shopping_results.length === 0) {
+            return { data: [] };
+        }
+
+        const shoppingResults: ShoppingResult[] = data.shopping_results
+            .slice(0, 5) // Pega apenas os 5 primeiros resultados
+            .map((item: any) => ({
+                position: item.position,
+                title: item.title,
+                link: item.link,
+                price: item.price,
+                source: item.source,
+                thumbnail: item.thumbnail,
+            }));
+            
+        return { data: shoppingResults };
+    } catch (e) {
+        console.error(e);
+        return { error: e instanceof Error ? e.message : "Ocorreu um erro desconhecido ao buscar produtos." };
     }
 }

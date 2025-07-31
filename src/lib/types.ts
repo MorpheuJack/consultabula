@@ -19,3 +19,12 @@ export type Product = {
   image: string;
   category: string;
 };
+
+export type ShoppingResult = {
+  position: number;
+  title: string;
+  link: string;
+  price: string;
+  source: string;
+  thumbnail: string;
+};
