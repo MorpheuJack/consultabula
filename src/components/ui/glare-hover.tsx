@@ -4,11 +4,6 @@
 import React, { useRef } from "react";
 
 interface GlareHoverProps {
-  width?: string;
-  height?: string;
-  background?: string;
-  borderRadius?: string;
-  borderColor?: string;
   children?: React.ReactNode;
   glareColor?: string;
   glareOpacity?: number;
@@ -21,11 +16,6 @@ interface GlareHoverProps {
 }
 
 const GlareHover: React.FC<GlareHoverProps> = ({
-  width,
-  height,
-  background,
-  borderRadius,
-  borderColor,
   children,
   glareColor = "#ffffff",
   glareOpacity = 0.5,
@@ -78,15 +68,8 @@ const GlareHover: React.FC<GlareHoverProps> = ({
 
   const containerStyle: React.CSSProperties = {
     position: "relative",
-    display: 'grid',
-    placeItems: 'center',
     overflow: "hidden",
     cursor: "pointer",
-    border: borderColor ? `1px solid ${borderColor}` : 'none',
-    width: width || 'auto',
-    height: height || 'auto',
-    background: background || 'transparent',
-    borderRadius: borderRadius || '0px',
     ...style,
   };
 
@@ -101,7 +84,7 @@ const GlareHover: React.FC<GlareHoverProps> = ({
     backgroundRepeat: "no-repeat",
     backgroundPosition: "-100% -100%, 0 0",
     pointerEvents: "none",
-    borderRadius: borderRadius || '0px',
+    borderRadius: 'inherit',
   };
 
   return (
