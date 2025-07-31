@@ -27,7 +27,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   return (
     <Link href={`/shop/${product.id}`} className="flex flex-col h-full group">
-      <Card className="flex flex-col h-full overflow-hidden rounded-lg shadow-lg group-hover:shadow-xl transition-shadow duration-300 group-hover:-translate-y-1">
+      <Card className="flex flex-col h-full overflow-hidden rounded-lg shadow-lg bg-card text-card-foreground group-hover:shadow-xl transition-shadow duration-300 group-hover:-translate-y-1">
         <CardHeader className="p-0 relative">
           <Image
             src={product.image}
@@ -46,6 +46,9 @@ export default function ProductCard({ product }: ProductCardProps) {
           <p className="text-lg font-extrabold text-accent">
             R$ {product.price.toFixed(2).replace('.', ',')}
           </p>
+          <Button size="icon" variant="ghost" className="text-muted-foreground hover:bg-accent/10 hover:text-accent" onClick={handleAddToCart} aria-label="Adicionar ao carrinho">
+            <ShoppingCart className="h-5 w-5" />
+          </Button>
         </CardFooter>
       </Card>
     </Link>

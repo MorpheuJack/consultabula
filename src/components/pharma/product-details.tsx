@@ -42,6 +42,12 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
                     <span className="text-xl text-white/70 line-through">R$ {product.originalPrice.toFixed(2).replace('.', ',')}</span>
                 )}
             </div>
+            <div className="flex items-center gap-4">
+                <Button size="lg" className="bg-white text-accent hover:bg-white/90 shadow-lg px-10 py-6 text-lg" onClick={handleAddToCart}>
+                    <ShoppingCart className="mr-2 h-5 w-5" />
+                    Adicionar ao Carrinho
+                </Button>
+            </div>
         </div>
     )
 }
