@@ -648,7 +648,7 @@ const MagicBento: React.FC<BentoProps> = ({
         <div className="card-responsive">
           {cardData.map((card, index) => {
             const Icon = card.icon;
-            const baseClassName = `card flex flex-col justify-between relative aspect-square min-h-[220px] w-full max-w-full p-5 rounded-2xl border border-solid font-light overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg ${
+            const baseClassName = `card flex flex-col relative aspect-square min-h-[220px] w-full max-w-full p-5 rounded-2xl border border-solid font-light overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg ${
               enableBorderGlow ? "card--border-glow" : ""
             }`;
 
@@ -663,11 +663,11 @@ const MagicBento: React.FC<BentoProps> = ({
             } as React.CSSProperties;
 
             const cardContent = (
-               <>
+               <div className="flex flex-col justify-between h-full">
                 <div className="flex-shrink-0 bg-accent/10 text-accent p-3 rounded-lg w-fit mb-4">
                     {Icon && <Icon className="h-7 w-7" />}
                 </div>
-                <div className="card__content flex flex-col relative text-white flex-grow justify-end">
+                <div className="card__content relative text-white">
                   <h3
                     className={`card__title font-bold text-lg m-0 mb-1 text-card-foreground ${
                       textAutoHide ? "text-clamp-1" : ""
@@ -683,7 +683,7 @@ const MagicBento: React.FC<BentoProps> = ({
                     {card.description}
                   </p>
                 </div>
-               </>
+               </div>
             )
 
             if (enableStars) {
@@ -721,3 +721,5 @@ const MagicBento: React.FC<BentoProps> = ({
 };
 
 export default MagicBento;
+
+    
