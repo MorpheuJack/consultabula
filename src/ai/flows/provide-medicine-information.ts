@@ -82,7 +82,7 @@ O objeto JSON deve conter uma única chave principal: \`medicamento\`. O valor d
 - \`principioAtivo\`: (String | null) O principal componente farmacológico do medicamento. Deve ser \`null\` se não for encontrado.
 - \`nomesComerciaisComuns\`: (Array de Strings | null) Uma lista de nomes de marca comuns no Brasil. Deve ser \`null\` se não for encontrado.
 - \`informacoes\`: (Objeto | null) Um objeto contendo os detalhes do medicamento. Será \`null\` se \`encontrado\` for \`false\`.
-  - \`resumo\`: (String) Um resumo conciso e de uma linha sobre o principal propósito do medicamento. Ex: "Analgésico e antitérmico para alívio de dores e febre."
+  - \`resumo\`: (String) Um resumo conciso e de uma linha sobre o principal propósito do medicamento.
   - \`usos\`: (Objeto) Contendo as chaves \`primarios\` (String) e \`secundarios\` (String). Use quebras de linha com "\\n-" para listar itens e melhorar a legibilidade.
   - \`contraindicacoes\`: (String) Lista detalhada de condições, alergias e interações que impedem o uso. Use "\\n-" para listar itens.
   - \`efeitosColaterais\`: (Objeto) Contendo as chaves \`comuns\` (String) e \`rarosMasGraves\` (String).
