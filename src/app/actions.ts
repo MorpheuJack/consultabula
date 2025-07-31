@@ -78,11 +78,11 @@ export async function getMedicineInfoFromImage(formData: FormData): Promise<{ da
 }
 
 export async function getShoppingResults(medicineName: string): Promise<{ data?: ShoppingResult[]; error?: string }> {
-    if (!process.env.SERPAPI_API_KEY) {
+    if (!process.env.NEXT_PUBLIC_SERPAPI_API_KEY) {
         return { error: "A chave da API da SerpApi não foi configurada." };
     }
 
-    const url = `https://serpapi.com/search.json?engine=google_shopping&q=${encodeURIComponent(medicineName)}&hl=pt-br&gl=br&api_key=${process.env.SERPAPI_API_KEY}`;
+    const url = `https://serpapi.com/search.json?engine=google_shopping&q=${encodeURIComponent(medicineName)}&hl=pt-br&gl=br&api_key=${process.env.NEXT_PUBLIC_SERPAPI_API_KEY}`;
 
     try {
         const response = await fetch(url);
