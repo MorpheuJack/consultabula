@@ -113,14 +113,35 @@ function PageContent() {
                     </motion.div>
                   )}
                   {medicineInfo && !isLoading && (
-                    <motion.div
-                      key="card"
-                      initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                      animate={{ opacity: 1, scale: 1, y: 0 }}
-                      transition={{ duration: 0.4, ease: 'easeOut' }}
-                    >
-                      <MedicineInfoCard info={medicineInfo} />
-                    </motion.div>
+                    <>
+                      <motion.div
+                        key="card"
+                        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        transition={{ duration: 0.4, ease: 'easeOut' }}
+                      >
+                        <MedicineInfoCard info={medicineInfo} />
+                      </motion.div>
+                      <motion.div
+                        key="map"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4, delay: 0.1, ease: 'easeOut' }}
+                        className="mt-8"
+                      >
+                        <h2 className="text-2xl font-bold text-white mb-4">Farmácias Próximas</h2>
+                        <div className="aspect-w-16 aspect-h-9 rounded-2xl overflow-hidden border-2 border-white/20 shadow-lg">
+                          <iframe 
+                            src="https://www.google.com/maps/d/embed?mid=1WWyjT09BgIH4DO0DHqofvc2eMRw-8tU&ehbc=2E312F&noprof=1" 
+                            className="w-full h-full"
+                            style={{ border: 0 }}
+                            allowFullScreen={false}
+                            loading="lazy"
+                            referrerPolicy="no-referrer-when-downgrade"
+                          ></iframe>
+                        </div>
+                      </motion.div>
+                    </>
                   )}
                 </AnimatePresence>
             </div>
