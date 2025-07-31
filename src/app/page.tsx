@@ -13,7 +13,7 @@ export default function Home() {
       <main className="flex-grow">
         <Hero />
         <Features />
-        <ScrollVelocity texts={['Consulta Bula', 'PharmaInfo AI']} velocity={20} />
+        <ScrollVelocity texts={['Consulta Bula', 'Guia de Medicamentos']} velocity={20} />
       </main>
     </div>
   );
