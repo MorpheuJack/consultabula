@@ -83,7 +83,8 @@ export async function getShoppingResults(medicineName: string): Promise<{ data?:
         return { data: [] }; // Retorna vazio para não mostrar erro na UI
     }
 
-    const url = `https://serpapi.com/search.json?engine=google_shopping&q=${encodeURIComponent(medicineName)}&hl=pt-br&gl=br&api_key=${process.env.NEXT_PUBLIC_SERPAPI_API_KEY}`;
+    const searchQuery = `${medicineName} medicamento`;
+    const url = `https://serpapi.com/search.json?engine=google_shopping&q=${encodeURIComponent(searchQuery)}&hl=pt-br&gl=br&api_key=${process.env.NEXT_PUBLIC_SERPAPI_API_KEY}`;
 
     try {
         const response = await fetch(url);
