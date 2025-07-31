@@ -33,8 +33,9 @@ export default function ProductCard({ product }: ProductCardProps) {
             className="w-full h-full"
             borderRadius="var(--radius)"
             glareColor="hsl(var(--primary))"
-            glareOpacity={0.1}
-            transitionDuration={800}
+            glareOpacity={0.15}
+            transitionDuration={500}
+            glareSize={200}
           >
             <div className="flex flex-col h-full w-full">
               <CardHeader className="p-0 relative">
