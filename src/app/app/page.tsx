@@ -130,11 +130,11 @@ function PageContent() {
                         className="mt-8"
                       >
                         <h2 className="text-2xl font-bold text-white mb-4">Farmácias Próximas</h2>
-                        <div className="aspect-w-16 aspect-h-9 rounded-2xl overflow-hidden border-2 border-white/20 shadow-lg">
+                        <div className="relative rounded-2xl overflow-hidden border-2 border-white/20 shadow-lg pb-[56.25%] h-0">
                           <iframe 
                             src="https://www.google.com/maps/d/embed?mid=1WWyjT09BgIH4DO0DHqofvc2eMRw-8tU&ehbc=2E312F&noprof=1" 
-                            className="w-full h-full"
-                            style={{ border: 0 }}
+                            className="absolute top-0 left-0 w-full h-full"
+                            style={{ border: 0, marginTop: '-58px' }}
                             allowFullScreen={false}
                             loading="lazy"
                             referrerPolicy="no-referrer-when-downgrade"
