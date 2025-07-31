@@ -12,7 +12,7 @@ type ShoppingResultCardProps = {
 
 export default function ShoppingResultCard({ item }: ShoppingResultCardProps) {
     const content = (
-      <Card className="flex flex-col h-full overflow-hidden rounded-lg shadow-lg bg-card/80 backdrop-blur-sm border-white/20 text-white group-hover:shadow-xl transition-all duration-300 group-hover:-translate-y-1">
+      <Card className="flex flex-col h-full overflow-hidden rounded-lg shadow-lg bg-card border-border/20 text-card-foreground group-hover:shadow-xl transition-all duration-300 group-hover:-translate-y-1">
         <CardHeader className="p-0 relative">
           <Image
             src={item.thumbnail}
@@ -23,11 +23,11 @@ export default function ShoppingResultCard({ item }: ShoppingResultCardProps) {
           />
         </CardHeader>
         <CardContent className="p-3 flex-grow">
-          <CardTitle className="text-sm font-bold mb-1 leading-tight line-clamp-2 text-white">{item.title}</CardTitle>
-          <CardDescription className="text-xs text-white/70 line-clamp-1">{item.source}</CardDescription>
+          <CardTitle className="text-sm font-bold mb-1 leading-tight line-clamp-2 text-card-foreground">{item.title}</CardTitle>
+          <CardDescription className="text-xs text-muted-foreground line-clamp-1">{item.source}</CardDescription>
         </CardContent>
         <CardFooter className="p-3 flex justify-between items-center mt-auto">
-          <p className="text-base font-extrabold text-white">
+          <p className="text-base font-extrabold text-accent">
             {item.price}
           </p>
         </CardFooter>
