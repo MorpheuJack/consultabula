@@ -32,7 +32,7 @@ export default function Footer({ bgColor = 'bg-background', textColor = 'text-fo
       <div className="container mx-auto px-4 py-12">
         <div className="flex flex-col items-center text-center">
             <Link href="/" className="mb-4 transition-transform duration-300 hover:scale-110">
-                <Image src="/llogo.png" alt="Consulta Bula Logo" width={64} height={64} />
+                <Image src="/ll.png" alt="Consulta Bula Logo" width={64} height={64} />
             </Link>
             <h2 className="text-2xl font-bold font-headline mb-2">Consulta Bula</h2>
             <p className="max-w-md mx-auto text-sm opacity-80 mb-6">

@@ -12,7 +12,7 @@ export default function Header() {
     <header className="py-6 px-4 sm:px-6 lg:px-8 bg-transparent absolute top-0 w-full z-50">
       <div className="container mx-auto flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3 group">
-            <Image src="/llogo.png" alt="Consulta Bula Logo" width={48} height={48} />
+            <Image src="/ll.png" alt="Consulta Bula Logo" width={48} height={48} />
         </Link>
         <nav className="hidden md:flex items-center gap-2">
             <Button variant="ghost" asChild className="text-white hover:bg-white/10 hover:text-white">
