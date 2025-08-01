@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: 'Consulta Bula | Guia de Medicamentos',
   description: 'Consulte informações de medicamentos por texto ou imagem. Rápido, seguro e confiável.',
   icons: {
-    icon: '/favicon.ico',
+    icon: '/ll_rodape.png',
   },
 };
 
